@@ -1,4 +1,5 @@
 package com.example.P1.model;
+
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -13,7 +14,7 @@ public class User {
     private String email;
     private Date lastPaymentDate;
 
-    public User(String name,String username,String password,String email,Date lastPaymentDate) {
+    public User(String name, String username, String password, String email, Date lastPaymentDate) {
         name = name;
         username = username;
         password = password;

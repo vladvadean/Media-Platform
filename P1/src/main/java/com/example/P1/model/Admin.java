@@ -1,16 +1,16 @@
 package com.example.P1.model;
+
 import jakarta.persistence.*;
 
 @Entity
 public class Admin {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private String id;
     private String name;
     private String username;
     private String password;
-    public Admin(String id,String name,String username,String password){
-        id = id;
+
+    public Admin(String name, String username, String password) {
         name = name;
         username = username;
         password = password;
@@ -35,6 +35,10 @@ public class Admin {
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

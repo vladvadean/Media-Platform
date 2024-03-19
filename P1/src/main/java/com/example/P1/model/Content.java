@@ -1,25 +1,28 @@
 package com.example.P1.model;
 
 import java.sql.Date;
+import java.sql.Time;
+
 import jakarta.persistence.*;
 
 @Entity
 public class Content {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private String id;
-    private String name;
+    private String title;
     private String link;
+
+    private Time duration;
     private Date releaseDate;
     private float rating;
 
-    public Content(String id, String name, String link, Date releaseDate, float rating) {
-        id = id;
+    public Content(String title, String link, Time duration, Date releaseDate, float rating) {
         rating = rating;
-        name = name;
+        title = title;
         link = link;
         releaseDate = releaseDate;
         rating = rating;
+        duration = duration;
 
     }
 
@@ -27,8 +30,8 @@ public class Content {
 
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public Date getReleaseDate() {
@@ -51,8 +54,8 @@ public class Content {
         this.link = link;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String name) {
+        this.title = name;
     }
 
     public void setRating(float rating) {
@@ -63,11 +66,23 @@ public class Content {
         this.releaseDate = releaseDate;
     }
 
+    public Time getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Time duration) {
+        this.duration = duration;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Content{" +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
+                ", name='" + title + '\'' +
                 ", link='" + link + '\'' +
                 ", releaseDate=" + releaseDate +
                 ", rating=" + rating +

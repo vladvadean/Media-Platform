@@ -1,20 +1,18 @@
 package com.example.P1.service;
 
-import com.example.P1.UserNotFoundException;
+import com.example.P1.model.UserNotFoundException;
 import com.example.P1.model.User;
 import com.example.P1.repository.UserConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class UserService {
     private final UserConnection userConnection;
 
-    // Constructor injection is recommended
     @Autowired
     public UserService(UserConnection userConnection) {
         this.userConnection = userConnection;
