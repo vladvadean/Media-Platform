@@ -4,22 +4,23 @@ import jakarta.persistence.*;
 
 import java.sql.Date;
 
+/**
+ * entity class for user
+ */
 @Entity
 public class User {
     @Id
     private String id;
-    private String name;
     private String username;
     private String password;
     private String email;
     private Date lastPaymentDate;
 
-    public User(String name, String username, String password, String email, Date lastPaymentDate) {
-        name = name;
-        username = username;
-        password = password;
-        email = email;
-        lastPaymentDate = lastPaymentDate;
+    public User(String username, String password, String email, Date lastPaymentDate) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.lastPaymentDate = lastPaymentDate;
 
     }
 
@@ -29,10 +30,6 @@ public class User {
 
     public String getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public Date getLastPaymentDate() {
@@ -59,7 +56,6 @@ public class User {
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +

@@ -11,9 +11,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * communication between the http requests and application
+ * responsible for admin type requests
+ */
 @RestController
 @RequestMapping("/admin")
 public class AdminResources {
+    /**
+     * class attribute needed for the CRUD methods implementation
+     */
     private final AdminService adminService;
 
     public AdminResources(AdminService adminService) {
@@ -33,7 +40,7 @@ public class AdminResources {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Admin> addContent(@RequestBody Admin admin) {
+    public ResponseEntity<Admin> addAdmin(@RequestBody Admin admin) {
         admin.setId(UUID.randomUUID().toString());
         Admin admin1 = adminService.addAdmin(admin);
 
@@ -41,13 +48,13 @@ public class AdminResources {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Admin> updateUser(@RequestBody Admin admin) {
+    public ResponseEntity<Admin> updateAdmin(@RequestBody Admin admin) {
         Admin admin1 = adminService.updateAdmin(admin);
-        return new ResponseEntity<>(admin, HttpStatus.OK);
+        return new ResponseEntity<>(admin1, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteUserById(@PathVariable("id") String id) {
+    public ResponseEntity<?> deleteAdminById(@PathVariable("id") String id) {
         adminService.deleteAdminById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

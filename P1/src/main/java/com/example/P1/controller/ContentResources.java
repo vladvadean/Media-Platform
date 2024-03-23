@@ -23,13 +23,13 @@ public class ContentResources {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Content>> getAllUsers() {
+    public ResponseEntity<List<Content>> getAllContent() {
         List<Content> content = contentService.getAllContent();
         return new ResponseEntity<>(content, HttpStatus.FOUND);
     }
 
     @GetMapping("find/{id}")
-    public ResponseEntity<Content> getUserById(@PathVariable("id") String id) {
+    public ResponseEntity<Content> getContentById(@PathVariable("id") String id) {
         Content content = contentService.getContentById(id);
         return new ResponseEntity<>(content, HttpStatus.FOUND);
     }
@@ -43,13 +43,13 @@ public class ContentResources {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Content> updateUser(@RequestBody Content content) {
+    public ResponseEntity<Content> updateContent(@RequestBody Content content) {
         Content content1 = contentService.updateContent(content);
         return new ResponseEntity<>(content1, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteUserById(@PathVariable("id") String id) {
+    public ResponseEntity<?> deleteContentById(@PathVariable("id") String id) {
         contentService.deleteContentById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

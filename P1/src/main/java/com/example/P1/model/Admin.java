@@ -2,6 +2,9 @@ package com.example.P1.model;
 
 import jakarta.persistence.*;
 
+/**
+ * entity class for admin
+ */
 @Entity
 public class Admin {
     @Id

@@ -2,7 +2,8 @@ package com.example.P1.service;
 
 import com.example.P1.model.UserNotFoundException;
 import com.example.P1.model.User;
-import com.example.P1.repository.UserConnection;
+import com.example.P1.repository.UserConnectionDB;
+import com.example.P1.contract.UserConnectionContract;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,32 +11,37 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class UserService {
-    private final UserConnection userConnection;
+public class UserService implements UserConnectionContract {
+    private final UserConnectionDB userConnectionDB;
 
     @Autowired
-    public UserService(UserConnection userConnection) {
-        this.userConnection = userConnection;
+    public UserService(UserConnectionDB userConnectionDB) {
+        this.userConnectionDB = userConnectionDB;
     }
 
+    @Override
     public User getUserById(String id) {
-        return userConnection.findUserById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
+        return userConnectionDB.findUserById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
     }
 
+    @Override
     public List<User> getAllUsers() {
-        return userConnection.findAll();
+        return userConnectionDB.findAll();
     }
 
+    @Override
     public User addUser(User user) {
         user.setId(UUID.randomUUID().toString());
-        return userConnection.save(user);
+        return userConnectionDB.save(user);
     }
 
+    @Override
     public void deleteUserById(String id) {
-        userConnection.deleteById(id);
+        userConnectionDB.deleteById(id);
     }
+    @Override
 
     public User updateUser(User user) {
-        return userConnection.save(user);
+        return userConnectionDB.save(user);
     }
 }

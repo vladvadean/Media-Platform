@@ -5,6 +5,9 @@ import java.sql.Time;
 
 import jakarta.persistence.*;
 
+/**
+ * entity class for content
+ */
 @Entity
 public class Content {
     @Id
@@ -48,30 +51,6 @@ public class Content {
 
     public String getLink() {
         return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public void setTitle(String name) {
-        this.title = name;
-    }
-
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
-
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public Time getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Time duration) {
-        this.duration = duration;
     }
 
     public void setId(String id) {

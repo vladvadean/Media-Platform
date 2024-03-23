@@ -6,7 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * interface contains the implemented methods in JpaRepository
+ * needed for the CRUD operations on admin
+ */
 @Repository
-public interface AdminConnection extends JpaRepository<Admin, String> {
+public interface AdminConnectionDB extends JpaRepository<Admin, String> {
     Optional<Admin> findAdminById(String id);
 }

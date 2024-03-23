@@ -1,15 +1,12 @@
 package com.example.P1.controller;
 
 import com.example.P1.model.User;
-import com.example.P1.repository.UserConnection;
 import com.example.P1.service.UserService;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
