@@ -3,7 +3,10 @@ package com.example.P1.model;
 import jakarta.persistence.*;
 
 /**
- * entity class for admin
+ * entity class for admin containing:
+ * id, name, username and password
+ * entity class used to store all the authentication
+ * data for admins
  */
 @Entity
 public class Admin {

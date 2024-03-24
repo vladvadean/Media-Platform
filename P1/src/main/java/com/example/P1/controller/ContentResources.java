@@ -12,10 +12,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
+/**
+ * communication between the http requests and application
+ * responsible for content type requests
+ */
 @RestController
 @RequestMapping("/content")
 public class ContentResources {
+    /**
+     * class attribute needed for the CRUD methods implementation
+     */
     private final ContentService contentService;
 
     public ContentResources(ContentService contentService) {

@@ -5,7 +5,8 @@ import com.example.P1.model.Content;
 import java.util.List;
 
 /**
- * a contract interface to make sure the methods to make CRUD content operations are implemented
+ * a contract interface to make sure the methods
+ * to make CRUD content operations are implemented
  */
 public interface ContentConnectionContract {
     public Content getContentById(String id);

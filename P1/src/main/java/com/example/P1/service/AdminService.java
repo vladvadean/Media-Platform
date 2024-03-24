@@ -1,7 +1,7 @@
 package com.example.P1.service;
 
 import com.example.P1.model.Admin;
-import com.example.P1.model.AdminNotFoundException;
+import com.example.P1.model.ItemNotFoundException;
 import com.example.P1.repository.AdminConnectionDB;
 import com.example.P1.contract.AdminConnectionContract;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,7 @@ public class AdminService implements AdminConnectionContract {
 
     @Override
     public Admin getAdminById(String id) {
-        return adminConnectionDB.findAdminById(id).orElseThrow(() -> new AdminNotFoundException("Admin by id " + id + " was not found"));
+        return adminConnectionDB.findAdminById(id).orElseThrow(() -> new ItemNotFoundException("Admin by id " + id + " was not found"));
     }
 
     @Override

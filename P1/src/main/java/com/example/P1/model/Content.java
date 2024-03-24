@@ -6,7 +6,10 @@ import java.sql.Time;
 import jakarta.persistence.*;
 
 /**
- * entity class for content
+ * entity class for content containing:
+ * id, title, link, duration, release date and rating
+ * entity that stores all the information relevant to be
+ * displayed about the content
  */
 @Entity
 public class Content {

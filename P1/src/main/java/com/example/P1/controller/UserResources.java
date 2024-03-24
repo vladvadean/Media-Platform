@@ -8,10 +8,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
-
+/**
+ * communication between the http requests and application
+ * responsible for user type requests
+ */
 @RestController
 @RequestMapping("/user")
 public class UserResources {
+    /**
+     * class attribute needed for the CRUD methods implementation
+     */
     private final UserService userService;
 
     public UserResources(UserService userService) {

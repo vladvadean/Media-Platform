@@ -11,9 +11,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * communication between the http requests and application
+ * responsible for liked content type requests
+ */
 @RestController
 @RequestMapping("/likedContent")
 public class LikedContentResources {
+    /**
+     * class attribute needed for the CRUD methods implementation
+     */
     private final LikedContentService likedContentService;
 
     public LikedContentResources(LikedContentService likedContentService) {
@@ -25,27 +32,44 @@ public class LikedContentResources {
         List<LikedContent> likedContent = likedContentService.getAllLikedContent();
         return new ResponseEntity<>(likedContent, HttpStatus.FOUND);
     }
+
     @GetMapping("find/{id}")
     public ResponseEntity<LikedContent> getContentById(@PathVariable("id") String id) {
         LikedContent likedContent = likedContentService.getLikedContentById(id);
         return new ResponseEntity<>(likedContent, HttpStatus.FOUND);
     }
 
-    @GetMapping("findUser/{id}")
-    public ResponseEntity<List<LikedContent>> getLikedContentByUserId(@PathVariable("id") String id) {
-        List<LikedContent> likedContent = likedContentService.getAllLikedContentByUserId(id);
+    /**
+     * return the result of a SELECT operation by userId
+     * @param userId user id
+     * @return an http response entity
+     */
+    @GetMapping("findUser/{userId}")
+    public ResponseEntity<List<LikedContent>> getLikedContentByUserId(@PathVariable("userId") String userId) {
+        List<LikedContent> likedContent = likedContentService.getAllLikedContentByUserId(userId);
         return new ResponseEntity<>(likedContent, HttpStatus.FOUND);
     }
 
-    @GetMapping("findContent/{id}")
-    public ResponseEntity<List<LikedContent>> getLikedContentByContentId(@PathVariable("id") String id) {
-        List<LikedContent> likedContent = likedContentService.getAllLikedContentByContentId(id);
+    /**
+     * return the result of a SELECT operation by contentId
+     * @param contentId content id
+     * @return an http response entity
+     */
+    @GetMapping("findContent/{contentId}")
+    public ResponseEntity<List<LikedContent>> getLikedContentByContentId(@PathVariable("contentId") String contentId) {
+        List<LikedContent> likedContent = likedContentService.getAllLikedContentByContentId(contentId);
         return new ResponseEntity<>(likedContent, HttpStatus.FOUND);
     }
 
+    /**
+     * return the result of a SELECT operation by userId and contentId
+     * @param userId user id
+     * @param cotentId content id
+     * @return an http response entity
+     */
     @GetMapping("findUserContent/{userId}/{contentId}")
-    public ResponseEntity<LikedContent> getLikedContentByUserContentId(@PathVariable("userId") String userId,@PathVariable("contentId") String cotentId) {
-        LikedContent likedContent = likedContentService.getLikedContentByUserContentId(userId,cotentId);
+    public ResponseEntity<LikedContent> getLikedContentByUserContentId(@PathVariable("userId") String userId, @PathVariable("contentId") String cotentId) {
+        LikedContent likedContent = likedContentService.getLikedContentByUserContentId(userId, cotentId);
         return new ResponseEntity<>(likedContent, HttpStatus.FOUND);
     }
 

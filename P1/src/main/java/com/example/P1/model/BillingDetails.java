@@ -4,7 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import java.time.LocalDateTime;
-
+/**
+ * entity class for admin containing:
+ * id, user id, card number, cvv code, owner name and transaction date
+ * entity class to store all payment methods and
+ * information about all the payments
+ */
 @Entity
 public class BillingDetails {
     @Id

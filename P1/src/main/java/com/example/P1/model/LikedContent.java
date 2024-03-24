@@ -4,7 +4,12 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
+/**
+ * entity class for liked content containing:
+ * id, user id and content id
+ * this entity is used to store all the records
+ * of all liked content on the platform
+ */
 @Entity
 public class LikedContent {
     @Id

@@ -1,6 +1,6 @@
 package com.example.P1.service;
 
-import com.example.P1.model.UserNotFoundException;
+import com.example.P1.model.ItemNotFoundException;
 import com.example.P1.model.User;
 import com.example.P1.repository.UserConnectionDB;
 import com.example.P1.contract.UserConnectionContract;
@@ -9,9 +9,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-
+/**
+ * this class implements the CRUD user contract
+ * and calls all the methods needed already implemented
+ * in the UserConnectionDB interface
+ */
 @Service
 public class UserService implements UserConnectionContract {
+    /**
+     * interface that contains references to the JPA CRUD operations
+     * and used for interface dependency injection
+     */
     private final UserConnectionDB userConnectionDB;
 
     @Autowired
@@ -21,7 +29,7 @@ public class UserService implements UserConnectionContract {
 
     @Override
     public User getUserById(String id) {
-        return userConnectionDB.findUserById(id).orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
+        return userConnectionDB.findUserById(id).orElseThrow(() -> new ItemNotFoundException("User by id " + id + " was not found"));
     }
 
     @Override

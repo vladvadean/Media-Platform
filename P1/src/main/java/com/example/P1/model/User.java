@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 /**
- * entity class for user
+ * entity class for user containing:
+ * id, username, password, email and last payment date
+ * entity to store all the required data for authentication
+ * and last payment date
  */
 @Entity
 public class User {

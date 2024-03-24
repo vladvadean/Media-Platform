@@ -2,17 +2,24 @@ package com.example.P1.service;
 
 import com.example.P1.contract.BillingDetailsConnectionContract;
 import com.example.P1.model.BillingDetails;
-import com.example.P1.model.Content;
-import com.example.P1.model.ContentNotFoundException;
+import com.example.P1.model.ItemNotFoundException;
 import com.example.P1.repository.BillingDetailsConnectionDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
+/**
+ * this class implements the CRUD billing details contract
+ * and calls all the methods needed already implemented
+ * in the BillingDetailsConnectionDB interface
+ */
 @Service
 public class BillingDetailsService implements BillingDetailsConnectionContract {
+    /**
+     * interface that contains references to the JPA CRUD operations
+     * and used for interface dependency injection
+     */
     private final BillingDetailsConnectionDB billingDetailsConnectionDB;
 
     @Autowired
@@ -21,7 +28,7 @@ public class BillingDetailsService implements BillingDetailsConnectionContract {
     }
     @Override
     public BillingDetails getBillingDetailsById(String id) {
-        return billingDetailsConnectionDB.findBillingDetailsByUserId(id).orElseThrow(() -> new ContentNotFoundException("Billing details by user id " + id + " was not found"));
+        return billingDetailsConnectionDB.findBillingDetailsByUserId(id).orElseThrow(() -> new ItemNotFoundException("Billing details by user id " + id + " was not found"));
     }
 
     @Override

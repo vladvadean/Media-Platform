@@ -8,10 +8,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
-
+/**
+ * communication between the http requests and application
+ * responsible for billing details type requests
+ */
 @RestController
 @RequestMapping("/billingDetails")
 public class BillingDetailsResources {
+    /**
+     * class attribute needed for the CRUD methods implementation
+     */
     private final BillingDetailsService billingDetailsService;
 
     public BillingDetailsResources(BillingDetailsService billingDetailsService) {
@@ -24,7 +30,7 @@ public class BillingDetailsResources {
         return new ResponseEntity<>(billingDetails, HttpStatus.FOUND);
     }
 
-    @GetMapping("find/{userId}")
+    @GetMapping("find/{id}")
     public ResponseEntity<BillingDetails> getBillingDetails(@PathVariable("id") String id) {
         BillingDetails billingDetails = billingDetailsService.getBillingDetailsById(id);
         return new ResponseEntity<>(billingDetails, HttpStatus.FOUND);
