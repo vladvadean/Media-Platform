@@ -28,6 +28,8 @@ For the admin the list of use cases is:
  4. see recommended content
 
 ## Database
+![P1DatabaseDiagram](https://github.com/vladvadean/Media-Platform/assets/126804850/7646ad33-54cf-4462-b5ae-9a6a95e0ed67)
 
-![P1DatabaseDiagram](https://github.com/vladvadean/Media-Platform/assets/126804850/5c574322-e3de-413e-8974-6b06af92da92)
+
+
 
