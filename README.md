@@ -27,4 +27,7 @@ For the admin the list of use cases is:
  3. see content
  4. see recommended content
 
+## Database
+
+![P1DatabaseDiagram](https://github.com/vladvadean/Media-Platform/assets/126804850/5c574322-e3de-413e-8974-6b06af92da92)
 
