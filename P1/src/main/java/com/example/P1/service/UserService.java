@@ -1,5 +1,6 @@
 package com.example.P1.service;
 
+import com.example.P1.model.BillingDetails;
 import com.example.P1.model.ItemNotFoundException;
 import com.example.P1.model.User;
 import com.example.P1.repository.UserConnectionDB;
@@ -47,9 +48,14 @@ public class UserService implements UserConnectionContract {
     public void deleteUserById(String id) {
         userConnectionDB.deleteById(id);
     }
-    @Override
 
+    @Override
     public User updateUser(User user) {
         return userConnectionDB.save(user);
+    }
+
+    @Override
+    public BillingDetails getLastPaymentOfUser(String id) {
+        return userConnectionDB.getLastPaymentOfUser(id).orElseThrow(() -> new ItemNotFoundException("User by id " + id + " has no recorded payments"));
     }
 }

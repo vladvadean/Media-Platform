@@ -1,9 +1,8 @@
 package com.example.P1.controller;
 
+import com.example.P1.contract.AdminConnectionContract;
 import com.example.P1.model.Admin;
-import com.example.P1.model.Content;
-import com.example.P1.service.AdminService;
-import com.example.P1.service.ContentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +20,10 @@ public class AdminResources {
     /**
      * class attribute needed for the CRUD methods implementation
      */
-    private final AdminService adminService;
+    private final AdminConnectionContract adminService;
 
-    public AdminResources(AdminService adminService) {
+    @Autowired
+    public AdminResources(AdminConnectionContract adminService) {
         this.adminService = adminService;
     }
 

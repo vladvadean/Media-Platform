@@ -1,5 +1,6 @@
 package com.example.P1.contract;
 
+import com.example.P1.model.BillingDetails;
 import com.example.P1.model.User;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface UserConnectionContract {
     public void deleteUserById(String id);
 
     public User updateUser(User user);
+
+    public BillingDetails getLastPaymentOfUser(String id);
 }

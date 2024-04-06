@@ -1,5 +1,6 @@
 package com.example.P1.controller;
 
+import com.example.P1.model.BillingDetails;
 import com.example.P1.model.User;
 import com.example.P1.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+
 /**
  * communication between the http requests and application
  * responsible for user type requests
@@ -54,6 +56,12 @@ public class UserResources {
     public ResponseEntity<?> deleteUser(@PathVariable("id") String id) {
         userService.deleteUserById(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/getLastPayment/{id}")
+    public ResponseEntity<?> getLastPaymentOfUser(@PathVariable("id") String id) {
+        BillingDetails latestBillingDetails= userService.getLastPaymentOfUser(id);
+        return new ResponseEntity<>(latestBillingDetails, HttpStatus.FOUND);
     }
 
 }
