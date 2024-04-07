@@ -1,5 +1,6 @@
 package com.example.P1.model;
 
+import com.example.P1.notifications.Observer;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -11,7 +12,7 @@ import java.sql.Date;
  * and last payment date
  */
 @Entity
-public class User {
+public class User implements Observer {
     @Id
     private String id;
     private String username;
@@ -53,6 +54,11 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public void update(Content content) {
+        System.out.println("UPDATE: New content added: " + content + " for the user with id: " + id);
     }
 
     @Override

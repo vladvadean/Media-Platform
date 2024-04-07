@@ -56,6 +56,10 @@ public class Content {
         return link;
     }
 
+    public Time getDuration() {
+        return duration;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
