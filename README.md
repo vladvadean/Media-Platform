@@ -77,6 +77,18 @@ mvn spring-boot:run
 - **Repository Layer**: Handles data persistence operations.
 - **Security Layer**: Ensures authenticated and authorized access.
 
+### Controller Layer
+&nbsp; &nbsp;&nbsp; &nbsp;The Controller Layer serves as the gateway for HTTP requests, effectively bridging user interactions with the application's functionalities. It interprets user inputs captured through forms or URLs and delegates them to the appropriate service layer methods. Essential for validating incoming data, this layer orchestrates the application logic flow based on user requests and determines the nature of responses (HTML, JSON, etc.) to be returned. As the intermediary between the user interface and application's core operations, the Controller Layer ensures a smooth and coherent user experience by managing the HTTP request/response cycle.
+
+### Service Layer
+&nbsp; &nbsp;&nbsp; &nbsp;At the heart of the application, the Service Layer is where business logic is centralized, orchestrating data flow to and from the repository layer and preparing it for the controller layer. It hosts service classes responsible for executing specific business tasks like subscription fee calculations, user authentication, or content recommendation algorithms. This layer is pivotal for managing transactions, guaranteeing that business processes are executed accurately and efficiently. By abstracting the complexity of the business operations, the Service Layer promotes maintainability and scalability through a well-defined separation of concerns.
+
+### Repository Layer
+&nbsp; &nbsp;&nbsp; &nbsp;The Repository Layer is the application's data access gateway, abstracting the complexities of interactions with the data source. It provides a collection of operations for CRUD actions, allowing other application parts to interact with the database seamlessly without direct query handling. This layer plays a vital role in ensuring data integrity and consistency, managing entity relationships, and encapsulating database transactions. It effectively isolates data access logic, facilitating straightforward data operations and contributing to the application's overall clean architecture.
+
+### Security Layer
+&nbsp; &nbsp;&nbsp; &nbsp;Protecting the application from unauthorized access and potential security threats is the primary role of the Security Layer. It enforces authentication and authorization protocols, ensuring users are accurately identified and granted access based on their roles. This layer manages user sessions, encrypts sensitive data, and safeguards against common vulnerabilities (SQL injection, XSS, CSRF). Moreover, it upholds security policies, controlling password standards and user access rights, crucial for preserving data integrity and user privacy. As the defender of application security, this layer is indispensable for establishing a trusted and secure user environment.
+
 ### Database Schema
 &nbsp; &nbsp;&nbsp; &nbsp;The schema includes `User`, `Content`, `Admin`, `BillingDetails`, and `LikedContent` tables, designed to support efficient data management and retrieval.
 
