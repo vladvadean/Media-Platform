@@ -1,6 +1,7 @@
 package com.example.P1.contract;
 
 import com.example.P1.model.Admin;
+import com.example.P1.model.Content;
 
 import java.util.List;
 
@@ -18,4 +19,11 @@ public interface AdminConnectionContract {
     public void deleteAdminById(String id);
 
     public Admin updateAdmin(Admin admin);
+
+    /**
+     *
+     * @param adminId  id of the admin that added the content in the platform
+     * @return all the content added by the admin
+     */
+    public List<Content> getAllContentByAdminId(String adminId);
 }

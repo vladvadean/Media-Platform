@@ -1,6 +1,7 @@
 package com.example.P1.contract;
 
 import com.example.P1.model.BillingDetails;
+import com.example.P1.model.Content;
 import com.example.P1.model.User;
 
 import java.util.List;
@@ -21,4 +22,10 @@ public interface UserConnectionContract {
     public User updateUser(User user);
 
     public BillingDetails getLastPaymentOfUser(String id);
+
+    /**
+     * @param userId id of the user
+     * @return get all content that was liked by user that has the id userId
+     */
+    public List<Content> getAllLikedContentByUser(String userId);
 }

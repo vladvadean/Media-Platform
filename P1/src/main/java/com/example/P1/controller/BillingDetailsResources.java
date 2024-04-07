@@ -1,5 +1,6 @@
 package com.example.P1.controller;
 
+import com.example.P1.contract.BillingDetailsConnectionContract;
 import com.example.P1.model.BillingDetails;
 import com.example.P1.service.BillingDetailsService;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,9 @@ public class BillingDetailsResources {
     /**
      * class attribute needed for the CRUD methods implementation
      */
-    private final BillingDetailsService billingDetailsService;
+    private final BillingDetailsConnectionContract billingDetailsService;
 
-    public BillingDetailsResources(BillingDetailsService billingDetailsService) {
+    public BillingDetailsResources(BillingDetailsConnectionContract billingDetailsService) {
         this.billingDetailsService = billingDetailsService;
     }
 

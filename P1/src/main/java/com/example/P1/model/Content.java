@@ -15,6 +15,7 @@ import jakarta.persistence.*;
 public class Content {
     @Id
     private String id;
+    private String adminId;
     private String title;
     private String link;
 
@@ -22,7 +23,7 @@ public class Content {
     private Date releaseDate;
     private float rating;
 
-    public Content(String title, String link, Time duration, Date releaseDate, float rating) {
+    public Content(String adminId, String title, String link, Time duration, Date releaseDate, float rating) {
         rating = rating;
         title = title;
         link = link;
@@ -34,6 +35,9 @@ public class Content {
 
     public Content() {
 
+    }
+    public String getAdminId(){
+        return adminId;
     }
 
     public String getTitle() {

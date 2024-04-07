@@ -51,7 +51,4 @@ public class BillingDetailsService implements BillingDetailsConnectionContract {
         return billingDetailsConnectionDB.save(billingDetails);
     }
 
-
-
-
 }

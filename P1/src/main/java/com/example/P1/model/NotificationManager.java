@@ -6,6 +6,9 @@ import com.example.P1.notifications.Observer;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * class responsible for retaining a list of users that are notified when new content id added
+ */
 public class NotificationManager {
     private final Set<Observer> observers = new HashSet<>();
     private final Observable contentService;

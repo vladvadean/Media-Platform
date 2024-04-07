@@ -1,6 +1,7 @@
 package com.example.P1.service;
 
 import com.example.P1.model.Admin;
+import com.example.P1.model.Content;
 import com.example.P1.model.ItemNotFoundException;
 import com.example.P1.repository.AdminConnectionDB;
 import com.example.P1.contract.AdminConnectionContract;
@@ -52,5 +53,15 @@ public class AdminService implements AdminConnectionContract {
     @Override
     public Admin updateAdmin(Admin admin) {
         return adminConnectionDB.save(admin);
+    }
+
+    /**
+     *
+     * @param adminId  id of the admin that added the content in the platform
+     * @return get all the content added by the admin with the id adminId
+     */
+    @Override
+    public List<Content> getAllContentByAdminId(String adminId) {
+        return adminConnectionDB.getAllContentByAdminId(adminId).orElseThrow(() -> new ItemNotFoundException("Admin by id " + adminId + " did not insert any content"));
     }
 }

@@ -1,5 +1,6 @@
 package com.example.P1.controller;
 
+import com.example.P1.contract.ContentConnectionContract;
 import com.example.P1.model.Content;
 import com.example.P1.model.User;
 import com.example.P1.service.ContentService;
@@ -22,9 +23,10 @@ public class ContentResources {
     /**
      * class attribute needed for the CRUD methods implementation
      */
-    private final ContentService contentService;
+    private final ContentConnectionContract contentService;
 
-    public ContentResources(ContentService contentService) {
+
+    public ContentResources(ContentConnectionContract contentService) {
         this.contentService = contentService;
     }
 
@@ -58,5 +60,16 @@ public class ContentResources {
     public ResponseEntity<?> deleteContentById(@PathVariable("id") String id) {
         contentService.deleteContentById(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     *
+     * @param contentId the id of the content
+     * @return a response for the query of getting all users that liked the content that has id contentId
+     */
+    @GetMapping("/getAllUsersThatLiked/{contentId}")
+    public ResponseEntity<?> getAllUsersThatLiked(@PathVariable("contentId") String contentId){
+        List<User> userList = contentService.getAllUsersThatLiked(contentId);
+        return new ResponseEntity<>(userList,HttpStatus.FOUND);
     }
 }

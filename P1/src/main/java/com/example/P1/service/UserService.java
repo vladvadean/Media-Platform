@@ -1,10 +1,12 @@
 package com.example.P1.service;
 
 import com.example.P1.model.BillingDetails;
+import com.example.P1.model.Content;
 import com.example.P1.model.ItemNotFoundException;
 import com.example.P1.model.User;
 import com.example.P1.notifications.Observable;
 import com.example.P1.notifications.Observer;
+import com.example.P1.repository.LikedContentConnectionDB;
 import com.example.P1.repository.UserConnectionDB;
 import com.example.P1.contract.UserConnectionContract;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class UserService implements UserConnectionContract {
      * and used for interface dependency injection
      */
     private final UserConnectionDB userConnectionDB;
+    /**
+     * observable interface needed to handle the addition/removal of the notified users
+     */
     private final Observable contentService;
 
     @Autowired
@@ -63,10 +68,23 @@ public class UserService implements UserConnectionContract {
         return userConnectionDB.save(user);
     }
 
+    /**
+     *
+     * @param id the id of the user
+     * @return the last payment of the user with the id id
+     */
     @Override
     public BillingDetails getLastPaymentOfUser(String id) {
         return userConnectionDB.getLastPaymentOfUser(id).orElseThrow(() -> new ItemNotFoundException("User by id " + id + " has no recorded payments"));
     }
 
-    //notifications methods
+    /**
+     *
+     * @param userId id of the user
+     * @return the list of content liked by the user with the id userId
+     */
+    @Override
+    public List<Content> getAllLikedContentByUser(String userId){
+        return userConnectionDB.getAllLikedContentByUser(userId).orElseThrow(() -> new ItemNotFoundException("User by id " + userId + " did not leave any like"));
+    }
 }

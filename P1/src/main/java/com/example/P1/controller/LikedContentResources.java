@@ -1,5 +1,6 @@
 package com.example.P1.controller;
 
+import com.example.P1.contract.LikedContentConnectionContract;
 import com.example.P1.model.Content;
 import com.example.P1.model.LikedContent;
 import com.example.P1.service.ContentService;
@@ -21,9 +22,9 @@ public class LikedContentResources {
     /**
      * class attribute needed for the CRUD methods implementation
      */
-    private final LikedContentService likedContentService;
+    private final LikedContentConnectionContract likedContentService;
 
-    public LikedContentResources(LikedContentService likedContentService) {
+    public LikedContentResources(LikedContentConnectionContract likedContentService) {
         this.likedContentService = likedContentService;
     }
 

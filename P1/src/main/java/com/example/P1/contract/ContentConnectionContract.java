@@ -1,6 +1,7 @@
 package com.example.P1.contract;
 
 import com.example.P1.model.Content;
+import com.example.P1.model.User;
 
 import java.util.List;
 
@@ -18,4 +19,11 @@ public interface ContentConnectionContract {
     public void deleteContentById(String id);
 
     public Content updateContent(Content content);
+
+    /**
+     *
+     * @param contentId id of the content
+     * @return the list of users that liked the content
+     */
+    public List<User> getAllUsersThatLiked(String contentId);
 }

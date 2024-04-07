@@ -2,6 +2,7 @@ package com.example.P1.service;
 
 import com.example.P1.model.Content;
 import com.example.P1.model.ItemNotFoundException;
+import com.example.P1.model.User;
 import com.example.P1.notifications.Observable;
 import com.example.P1.notifications.Observer;
 import com.example.P1.repository.ContentConnectionDB;
@@ -24,6 +25,9 @@ public class ContentService implements ContentConnectionContract, Observable {
      * and used for interface dependency injection
      */
     private final ContentConnectionDB contentConnectionDB;
+    /**
+     * list containing all the users that shall be notified
+     */
     private List<Observer> observers = new ArrayList<>();
 
     @Autowired
@@ -33,7 +37,7 @@ public class ContentService implements ContentConnectionContract, Observable {
 
     @Override
     public Content getContentById(String id) {
-        return contentConnectionDB.findContentById(id).orElseThrow(() -> new ItemNotFoundException("Admin by id " + id + " was not found"));
+        return contentConnectionDB.findContentById(id).orElseThrow(() -> new ItemNotFoundException("Content by id " + id + " was not found"));
     }
 
     @Override
@@ -50,6 +54,11 @@ public class ContentService implements ContentConnectionContract, Observable {
     }
 
     @Override
+    public List<User> getAllUsersThatLiked(String contentId){
+        return contentConnectionDB.getAllUserThatLiked(contentId).orElseThrow(() -> new ItemNotFoundException("Content by id " + contentId + " was liked by none"));
+    }
+
+    @Override
     public void deleteContentById(String id) {
         contentConnectionDB.deleteById(id);
     }
@@ -60,16 +69,26 @@ public class ContentService implements ContentConnectionContract, Observable {
     }
 
     //notifications logic and observable methods
+
+    /**
+     * @param observer the user that needs to be added to the notification list
+     */
     @Override
     public void registerObserver(Observer observer){
         observers.add(observer);
     }
 
+    /**
+     * @param observer the user that needs to be removed from the notification list
+     */
     @Override
     public void removeObserver(Observer observer){
         observers.remove(observer);
     }
 
+    /**
+     * @param content the content entity that is added and that triggers the notification of the users
+     */
     @Override
     public void notifyObservers(Content content) {
         for(Observer observer:observers){

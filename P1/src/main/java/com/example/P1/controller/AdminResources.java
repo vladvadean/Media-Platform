@@ -2,6 +2,7 @@ package com.example.P1.controller;
 
 import com.example.P1.contract.AdminConnectionContract;
 import com.example.P1.model.Admin;
+import com.example.P1.model.Content;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,5 +58,16 @@ public class AdminResources {
     public ResponseEntity<?> deleteAdminById(@PathVariable("id") String id) {
         adminService.deleteAdminById(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
+     *
+     * @param adminId the id of the admin
+     * @return get a response of the query for getting all the content that the admin with the id adminId added
+     */
+    @GetMapping("/getContent/{adminId}")
+    public ResponseEntity<?> getAllContentByAdminId(@PathVariable("adminId") String adminId) {
+        List<Content> contentList = adminService.getAllContentByAdminId(adminId);
+        return new ResponseEntity<>(contentList, HttpStatus.FOUND);
     }
 }

@@ -1,6 +1,8 @@
 package com.example.P1.controller;
 
+import com.example.P1.contract.UserConnectionContract;
 import com.example.P1.model.BillingDetails;
+import com.example.P1.model.Content;
 import com.example.P1.model.User;
 import com.example.P1.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -20,7 +22,7 @@ public class UserResources {
     /**
      * class attribute needed for the CRUD methods implementation
      */
-    private final UserService userService;
+    private final UserConnectionContract userService;
 
     public UserResources(UserService userService) {
         this.userService = userService;
@@ -58,10 +60,20 @@ public class UserResources {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     *
+     * @param id id of the user
+     * @return  a response for the query of getting the last payment of the user that has the id id
+     */
     @GetMapping("/getLastPayment/{id}")
     public ResponseEntity<?> getLastPaymentOfUser(@PathVariable("id") String id) {
-        BillingDetails latestBillingDetails= userService.getLastPaymentOfUser(id);
+        BillingDetails latestBillingDetails = userService.getLastPaymentOfUser(id);
         return new ResponseEntity<>(latestBillingDetails, HttpStatus.FOUND);
     }
 
+    @GetMapping("/getAllLikedContent/{userId}")
+    public ResponseEntity<?> getAllLikedContent(@PathVariable("userId") String userId) {
+        List<Content> contentList = userService.getAllLikedContentByUser(userId);
+        return new ResponseEntity<>(contentList, HttpStatus.FOUND);
+    }
 }
