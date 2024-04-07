@@ -73,8 +73,7 @@ mvn spring-boot:run
 
 ### Database Schema
 &nbsp; &nbsp;&nbsp; &nbsp;The schema includes `User`, `Content`, `Admin`, `BillingDetails`, and `LikedContent` tables, designed to support efficient data management and retrieval.
-![p1databasediagram (1)](https://github.com/vladvadean/Media-Platform/assets/126804850/ebfed613-e6f4-4fd7-9d86-2434f02d6402)
-
+![p1](https://github.com/vladvadean/Media-Platform/assets/126804850/e722c929-ef13-4977-829f-73e09eb630c7)
 
 ## User Guide
 &nbsp; &nbsp;&nbsp; &nbsp;The user is the most important actor in the whole project. The user has the following use cases:
