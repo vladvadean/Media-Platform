@@ -81,7 +81,7 @@ mvn spring-boot:run
 
 This section provides detailed documentation of all API endpoints associated with each service class. It includes the HTTP methods, path URLs, expected input, and output formats.
 
-### Admin Service Endpoints
+### Admin Endpoints
 
 #### Get All Admins
 - **GET** `/admin/all`
