@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.example.P1.model.Admin;
+import com.example.P1.model.Content;
 import com.example.P1.repository.AdminConnectionDB;
 import org.junit.Before;
 import org.junit.Test;
@@ -96,5 +97,26 @@ public class AdminServiceTest {
         String adminId = "X";
         adminService.deleteAdminById(adminId);
         verify(contractRepositoryMock).deleteById(adminId);
+    }
+
+    /**
+     * Test to verify that getAllContentByAdminId method successfully retrieves content
+     * when content exists for a given admin ID.
+     * Ensures the method returns the correct list of content and that the expected methods on the mocked repository are called.
+     */
+    @Test
+    public void getAllContentByAdminIdTest() {
+        String adminId = "admin123";
+        List<Content> expectedContent = Arrays.asList(
+                new Content("admin123", "Title1", "link1", null, null, 4.5f),
+                new Content("admin123", "Title2", "link2", null, null, 3.5f)
+        );
+
+        when(contractRepositoryMock.getAllContentByAdminId(adminId)).thenReturn(Optional.of(expectedContent));
+
+        List<Content> actualContent = adminService.getAllContentByAdminId(adminId);
+
+        verify(contractRepositoryMock).getAllContentByAdminId(adminId);
+        assertEquals("The content list returned was not as expected.", expectedContent, actualContent);
     }
 }

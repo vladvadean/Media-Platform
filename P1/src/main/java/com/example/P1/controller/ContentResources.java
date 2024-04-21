@@ -45,7 +45,7 @@ public class ContentResources {
     @PostMapping("/add")
     public ResponseEntity<Content> addContent(@RequestBody Content content) {
         content.setId(UUID.randomUUID().toString());
-        Content content1 = contentService.addContent(content);
+            Content content1 = contentService.addContent(content);
         
         return new ResponseEntity<>(content1, HttpStatus.CREATED);
     }
