@@ -1,5 +1,6 @@
 
 
+
 # Media Platform Development Documentation
 
 ## Table of Contents
@@ -268,7 +269,7 @@ This section provides detailed documentation of all API endpoints associated wit
 - **Controller Layer**: Manages HTTP request/response cycles.
 - **Service Layer**: Implements the business logic.
 - **Repository Layer**: Handles data persistence operations.
-- **Security Layer**: Ensures authenticated and authorized access.
+- **Model Layer**: Provides the main classes for all the entities in the database.
 
 ### Controller Layer
 &nbsp; &nbsp;&nbsp; &nbsp;The Controller Layer serves as the gateway for HTTP requests, effectively bridging user interactions with the application's functionalities. It interprets user inputs captured through forms or URLs and delegates them to the appropriate service layer methods. Essential for validating incoming data, this layer orchestrates the application logic flow based on user requests and determines the nature of responses (HTML, JSON, etc.) to be returned. As the intermediary between the user interface and application's core operations, the Controller Layer ensures a smooth and coherent user experience by managing the HTTP request/response cycle.
@@ -279,8 +280,8 @@ This section provides detailed documentation of all API endpoints associated wit
 ### Repository Layer
 &nbsp; &nbsp;&nbsp; &nbsp;The Repository Layer is the application's data access gateway, abstracting the complexities of interactions with the data source. It provides a collection of operations for CRUD actions, allowing other application parts to interact with the database seamlessly without direct query handling. This layer plays a vital role in ensuring data integrity and consistency, managing entity relationships, and encapsulating database transactions. It effectively isolates data access logic, facilitating straightforward data operations and contributing to the application's overall clean architecture.
 
-### Security Layer
-&nbsp; &nbsp;&nbsp; &nbsp;Protecting the application from unauthorized access and potential security threats is the primary role of the Security Layer. It enforces authentication and authorization protocols, ensuring users are accurately identified and granted access based on their roles. This layer manages user sessions, encrypts sensitive data, and safeguards against common vulnerabilities (SQL injection, XSS, CSRF). Moreover, it upholds security policies, controlling password standards and user access rights, crucial for preserving data integrity and user privacy. As the defender of application security, this layer is indispensable for establishing a trusted and secure user environment.
+### Model Layer
+&nbsp; &nbsp;&nbsp; &nbsp;The Model Layer in the application architecture specifically focuses on the core representation of the data and the business logic associated with that data. It plays a critical role in defining the structure, relationships, and behavior of the data entities used throughout the application. This layer acts as a direct reflection of the domain within which the application operates, encapsulating the business domain's key concepts and rules.
 
 ### Database Schema
 &nbsp; &nbsp;&nbsp; &nbsp;The schema includes `User`, `Content`, `Admin`, `BillingDetails`, and `LikedContent` tables, designed to support efficient data management and retrieval.
