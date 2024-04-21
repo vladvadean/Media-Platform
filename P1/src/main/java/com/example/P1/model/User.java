@@ -1,6 +1,6 @@
 package com.example.P1.model;
 
-import com.example.P1.notifications.Observer;
+import com.example.P1.service.notifications.Observer;
 import jakarta.persistence.*;
 
 import java.sql.Date;

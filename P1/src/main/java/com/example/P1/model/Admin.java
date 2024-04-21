@@ -17,9 +17,9 @@ public class Admin {
     private String password;
 
     public Admin(String name, String username, String password) {
-        name = name;
-        username = username;
-        password = password;
+        this.name = name;
+        this.username = username;
+        this.password = password;
 
     }
 

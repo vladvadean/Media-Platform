@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class P1Application {
 
     public static void main(String[] args) {
-        //String cypher = CesarCypher.GenerateCypher("ANA",CypherDifficulty.SIMPLE);
+        // String cypher = CesarCypher.GenerateCypher("ANA",CypherDifficulty.SIMPLE);
         // System.out.println(cypher);
         SpringApplication.run(P1Application.class, args);
     }

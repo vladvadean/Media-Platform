@@ -24,12 +24,12 @@ public class Content {
     private float rating;
 
     public Content(String adminId, String title, String link, Time duration, Date releaseDate, float rating) {
-        rating = rating;
-        title = title;
-        link = link;
-        releaseDate = releaseDate;
-        rating = rating;
-        duration = duration;
+        this.rating = rating;
+        this.title = title;
+        this.link = link;
+        this.releaseDate = releaseDate;
+        this.rating = rating;
+        this.duration = duration;
 
     }
 

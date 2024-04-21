@@ -1,7 +1,7 @@
 package com.example.P1.model;
 
-import com.example.P1.notifications.Observable;
-import com.example.P1.notifications.Observer;
+import com.example.P1.service.notifications.Observable;
+import com.example.P1.service.notifications.Observer;
 
 import java.util.HashSet;
 import java.util.Set;

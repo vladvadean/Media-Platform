@@ -1,4 +1,4 @@
-package com.example.P1.notifications;
+package com.example.P1.service.notifications;
 
 import com.example.P1.model.Content;
 
