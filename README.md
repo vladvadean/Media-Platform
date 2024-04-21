@@ -1,4 +1,5 @@
 
+
 # Media Platform Development Documentation
 
 ## Table of Contents
@@ -10,6 +11,7 @@
 6. [Architecture](#architecture)
    - [Application Layers](#application-layers)
    - [Database Schema](#database-schema)
+7. [Endpoint Documentation](#endpoint-documentation)
 8. [User Guide](#user-guide)
 9. [Admin Guide](#admin-guide)
 11. [Testing](#testing)
@@ -68,6 +70,191 @@ mvn install
 mvn spring-boot:run
 
 &nbsp; &nbsp;&nbsp; &nbsp;The application should now be accessible on `http://localhost:8080`.
+
+## Endpoint Documentation
+
+This section provides detailed documentation of all API endpoints associated with each service class. It includes the HTTP methods, path URLs, expected input, and output formats.
+
+### Admin Service Endpoints
+
+#### Get All Admins
+- **GET** `/admin/all`
+- **Description**: Retrieves a list of all admins.
+- **Response**: `200 OK` with JSON array of admins.
+
+#### Get Admin by ID
+- **GET** `/admin/find/{id}`
+- **Description**: Retrieves a specific admin by their ID.
+- **Path Variable**: `id` - The ID of the admin.
+- **Response**: `200 OK` with admin details in JSON.
+
+#### Add Admin
+- **POST** `/admin/add`
+- **Description**: Adds a new admin.
+- **Request Body**: JSON object containing admin details.
+- **Response**: `201 Created` with created admin details in JSON.
+
+#### Update Admin
+- **PUT** `/admin/update`
+- **Description**: Updates an existing admin.
+- **Path Variable**: `id` - The ID of the admin.
+- **Request Body**: JSON object with updated admin data.
+- **Response**: `200 OK` with updated admin details in JSON.
+
+#### Delete Admin
+- **DELETE** `/admin/delete{id}`
+- **Description**: Deletes an admin by ID.
+- **Path Variable**: `id` - The ID of the admin to delete.
+- **Response**: `204 No Content`
+
+#### Get All Content
+- **GET** `/admin/getContent/{adminId}`
+- **Description**: Get all the content inserted by the admin with adminId.
+- **Path Variable**: `adminId` - The ID of the admin to find the content.
+- **Response**: `200 OK`
+
+### Content Endpoints
+
+#### Get All Content
+- **GET** `/content/all`
+- **Description**: Retrieves all content items.
+- **Response**: `200 OK` with JSON array of content items.
+
+#### Get Content by ID
+- **GET** `/content/find/{id}`
+- **Description**: Retrieves a specific content item by its ID.
+- **Path Variable**: `id` - The ID of the content item.
+- **Response**: `200 OK` with content details in JSON.
+
+#### Add Content
+- **POST** `/content/add`
+- **Description**: Adds a new content item.
+- **Request Body**: JSON object containing content details.
+- **Response**: `201 Created` with created content details in JSON.
+
+#### Update Content
+- **PUT** `/content/update`
+- **Description**: Updates an existing content item.
+- **Path Variable**: `id` - The ID of the content item to update.
+- **Request Body**: JSON object with updated content data.
+- **Response**: `200 OK` with updated content details in JSON.
+
+#### Delete Content
+- **DELETE** `/content/delete/{id}`
+- **Description**: Deletes a content item by its ID.
+- **Path Variable**: `id` - The ID of the content to delete.
+- **Response**: `204 No Content`
+
+#### Get User That Liked Content
+- **GET** `/content/getAllUsersThatLiked/{contentId}`
+- **Description**: Gets all the users that liked the content with contentId.
+- **Path Variable**: `contentId` - The ID of the content to get users.
+- **Response**: `200 OK`
+
+### Billing Details Endpoints
+
+#### Get Billing Details by ID
+- **GET** `/billingDetails/find/{id}`
+- **Description**: Retrieves billing details with a specific id.
+- **Path Variable**: `id` - The ID of the billing details.
+- **Response**: `200 OK` with billing details in JSON.
+
+#### Get All Billing Details
+- **GET** `/billingDetails/all`
+- **Description**: Retrieves all billing records.
+- **Response**: `200 OK` with JSON array of billing records.
+
+#### Add Billing Details
+- **POST** `/billingDetails/add`
+- **Description**: Adds new billing details.
+- **Request Body**: JSON object containing billing details.
+- **Response**: `201 Created` with created billing details in JSON.
+
+#### Update Billing Details
+- **PUT** `/billingDetails/update`
+- **Description**: Updates existing billing details.
+- **Request Body**: JSON object with updated billing details.
+- **Response**: `200 OK` with updated billing details in JSON.
+
+#### Delete Billing Details
+- **DELETE** `/billingDetails/delete/{id}`
+- **Description**: Deletes billing details by ID.
+- **Path Variable**: `id` - The ID of the billing details to delete.
+- **Response**: `204 No Content`
+
+### User Endpoints
+#### Get All Users
+  - **GET** `/user/all`
+  - **Description**: Retrieves all users.
+  - **Response**: `200 OK` with JSON array of users.
+
+#### Get User by Id
+  - **GET** `/user/find/{id}`
+  - **Description**: Retrieves a specific user by their ID.
+  - **Path Variable**: `id` - The ID of the user to be found.
+  - **Response**: `200 OK` with user details in JSON.
+
+#### Add user
+  - **POST** `/user/add`
+  - **Description**: Creates a new user.
+  - **Request Body**: JSON object containing user details.
+  - **Response**: `201 Created` with created user details in JSON.
+
+#### Update user
+- **PUT** `/user/update`
+- **Description**: Updates an existing user.
+- **Request Body**: JSON object with updated user data.
+- **Response**: `200 OK` with updated user details in JSON.
+
+#### Delete user
+  - **DELETE** `/user/delete/{id}`
+  - **Description**: Deletes a user by ID.
+  - **Path Variable**: `id` - The ID of the user to be deleted.
+  - **Response**: `204 No Content`
+
+#### Get LastPayment of User by ID
+  - **GET** `/user/getLastPayment/{userId}`
+  - **Description**: Retrieves the billing details of the last payment of a user with a certain id.
+  - **Path Variable**: `userId` - The ID of the user to be found.
+  - **Response**: `200 OK` with user details in JSON.
+
+#### Get All LikedContent by User by ID
+  - **GET** `/user/getAllLikedContent/{userId}`
+  - **Description**: Retrieves all the liked content of a user with a certain id.
+  - **Path Variable**: `userId` - The ID of the user to be found.
+  - **Response**: `200 OK` with user details in JSON.
+
+### Liked Content Endpoints
+#### Get All LikedContent
+  - **GET** `/likedContent/all`
+  - **Description**: Retrieves all liked content records.
+  - **Response**: `200 OK` with JSON array of liked content records.
+
+#### Get LikedContent by ID
+  - **GET** `/likedContent/find/{id}`
+  - **Description**: Retrieves a specific liked content record by its ID.
+  - **Path Variable**: `id` - The ID of the likedContent to be found.
+  - **Response**: `200 OK` with liked content details in JSON.
+
+#### Add LikedContent
+  - **POST** `/likedContent/add`
+  - **Description**: Creates a new liked content record.
+  - **Request Body**: JSON object containing liked content details.
+  - **Response**: `201 Created` with created liked content details in JSON.
+
+#### Delete LikedContent
+  - **DELETE** `/likedContent/delete/{id}`
+  - **Description**: Deletes a liked content record by ID.
+  - **Path Variable**: `id` - The ID of the user to be deleted.
+  - **Response**: `204 No Content`
+
+#### Get LikedContent by User ID and Content ID
+  - **GET** `likedContent/findUserContent/{userId}/{contentId}`
+  - **Description**: Retrieves all liked content records.
+  - **Path Variable**: 
+  - - `contentId` - The ID of the content to be found.
+  - - `userId` - The ID of the user to be found.
+  - **Response**: `200 OK` with JSON array of liked content records.
 
 ## Architecture
 
