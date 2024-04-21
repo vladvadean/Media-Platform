@@ -328,7 +328,51 @@ This section provides detailed documentation of all API endpoints associated wit
   &nbsp; &nbsp;&nbsp; &nbsp;The password and the name are required for the admin to login. Again the username will only will be used to display his digital persona. In case any user has malicious intents he will be deleted. Any other problem such as the payment of the subscription to be reevaluated manually should be a task for the admin. Having such power an admin should be the only one that can add another admins and the only to remove or add content.
 
 ## Testing
- &nbsp; &nbsp;&nbsp; &nbsp;The testing of the endpoints for the backend functionality Postman is the tool used to test the program in it's development. Every endpoint and every of its scenarios was tested in postman.
+
+Testing is a critical phase in the development lifecycle of the Media Platform, ensuring the reliability, security, and usability of the application. The backend functionality is thoroughly tested using Postman during development to verify each endpoint across various scenarios. Additionally, comprehensive unit testing is conducted using JUnit to ensure that each component of the service layer functions correctly in isolation.
+
+### Unit Testing with JUnit
+
+JUnit tests are employed to validate the business logic within the service layer of our application, ensuring that all business rules are correctly enforced and that the system behaves as expected under various conditions.
+
+#### Role of JUnit Tests in Service Layers
+
+- **Admin Service Testing**: JUnit tests for the Admin Service verify that administrators can be added, updated, retrieved, and deleted correctly. These tests check the integrity of administrative operations, such as secure password handling, role assignments, and the enforcement of admin-specific business rules.
+
+- **Content Service Testing**: These tests ensure that content management functions flawlessly. This includes testing the addition, retrieval, updating, and deletion of content items, as well as validating that notifications are sent correctly when new content is added, utilizing the Observable design pattern.
+
+- **User Service Testing**: JUnit tests for the User Service focus on user registration, data retrieval, updates, and the secure handling of user credentials. Additionally, these tests cover subscription management functionalities, ensuring that subscription logic (e.g., subscription renewals, cancellations) is handled correctly.
+
+- **Billing Details Service Testing**: These tests validate the accuracy and reliability of billing operations, ensuring that billing details are correctly managed and that transactions are processed securely. They also verify the retrieval of billing history and the updating of billing information.
+
+- **Liked Content Service Testing**: Tests for the Liked Content Service confirm that users can like and retrieve liked content accurately, and that the system maintains correct records of user preferences.
+
+### Test Coverage and Continuous Integration
+
+- **Coverage**: The goal is to achieve high test coverage to ensure that all critical paths within the application are tested. This includes testing edge cases and failure modes to ensure the system handles errors gracefully.
+
+- **Integration Testing**: Beyond unit testing, integration tests are conducted to ensure that different parts of the application work together seamlessly. This includes testing interactions between the service layer and the database, as well as the integration between the service layer and the controllers.
+
+- **Continuous Integration**: The platform utilizes a Continuous Integration (CI) system that automatically runs tests whenever changes are made to the codebase. This helps in identifying and fixing issues early in the development process.
+
+### Testing Tools and Practices
+
+- **Postman**: Used for testing API endpoints through manual and automated requests. It verifies the response status codes, headers, and bodies to ensure endpoints behave as expected.
+
+- **JUnit**: Used for writing and running unit tests on the Java application, focusing on the backend logic.
+
+- **Mockito**: Often used in conjunction with JUnit to provide mock objects and verify interactions between classes, particularly within the service layer.
+
+### Troubleshooting Common Test Failures
+
+- **Environment Issues**: Sometimes, tests fail due to configuration or environment issues rather than code defects. Ensure all environmental variables and configurations are correctly set for the testing environment.
+
+- **Dependency Problems**: Failures can occur if there are missing or incorrect versions of dependencies. Double-check that all dependencies are correctly declared and compatible.
+
+- **Database Connectivity**: Integration tests that involve the database may fail due to connectivity issues. Ensure that the database is accessible and that the test configurations point to the correct database instance.
+
+Through rigorous testing and continuous integration, the Media Platform aims to maintain high standards of quality and performance, ensuring a reliable and user-friendly product for both administrators and end-users.
+
 
 ## Troubleshooting
  &nbsp; &nbsp;&nbsp; &nbsp;Most common issues:
