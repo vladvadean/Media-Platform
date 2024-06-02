@@ -492,5 +492,9 @@ Through rigorous testing and continuous integration, the Media Platform aims to 
  - localhost:8080 does not work, but on other port does.
 Probably the port 8080 is already used by another process or that the properties of the project are not correctly set. Check the application properties one more time and terminate the process that is using the 8080 port, or use another port
 
+
+![P1](https://github.com/vladvadean/Media-Platform/assets/126804850/b7b50c19-8887-4700-9bf8-d73fb2b1d505)
+
+
 ## Future Work
 _to be added_
