@@ -495,6 +495,9 @@ Probably the port 8080 is already used by another process or that the properties
 
 ![P1](https://github.com/vladvadean/Media-Platform/assets/126804850/b7b50c19-8887-4700-9bf8-d73fb2b1d505)
 
+![Blank diagram](https://github.com/vladvadean/Media-Platform/assets/126804850/ea345d18-6783-4298-bf2a-0730fe3f3c6e)
+
+
 
 ## Future Work
 _to be added_
