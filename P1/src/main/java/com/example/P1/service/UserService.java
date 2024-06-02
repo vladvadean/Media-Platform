@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
 /**
  * this class implements the CRUD user contract
  * and calls all the methods needed already implemented
@@ -55,8 +56,8 @@ public class UserService implements UserConnectionContract {
 
     @Override
     public void deleteUserById(String id) {
-        User  user = userConnectionDB.findUserById(id).orElse(null);
-        if(user != null){
+        User user = userConnectionDB.findUserById(id).orElse(null);
+        if (user != null) {
             contentService.removeObserver(user);
             userConnectionDB.deleteById(id);
         }
@@ -68,7 +69,6 @@ public class UserService implements UserConnectionContract {
     }
 
     /**
-     *
      * @param id the id of the user
      * @return the last payment of the user with the id id
      */
@@ -78,12 +78,22 @@ public class UserService implements UserConnectionContract {
     }
 
     /**
-     *
      * @param userId id of the user
      * @return the list of content liked by the user with the id userId
      */
     @Override
-    public List<Content> getAllLikedContentByUser(String userId){
+    public List<Content> getAllLikedContentByUser(String userId) {
         return userConnectionDB.getAllLikedContentByUser(userId).orElseThrow(() -> new ItemNotFoundException("User by id " + userId + " did not leave any like"));
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return userConnectionDB.findByEmail(email)
+                .orElseThrow(() -> new ItemNotFoundException("User by email: " + email + " not found"));
+    }
+
+    public User findByEmailAndPassword(String email, String password) {
+        return userConnectionDB.findByEmailAndPassword(email, password)
+                .orElseThrow(() -> new ItemNotFoundException("Invalid email or password"));
     }
 }

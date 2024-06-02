@@ -1,0 +1,137 @@
+<button *ngIf="!menuVisible" (click)="toggleMenu()" class="btn btn-primary toggle-button">{{ getInitial() }}</button>
+<div class="menu" [ngClass]="{ 'show': menuVisible }">
+  <div class="menu-content">
+    <div class="menu-header">
+      <h2>Account Information</h2>
+      <button (click)="toggleMenu()" class="btn btn-secondary close-button">{{ getInitial() }}</button>
+    </div>
+    <div class="button-list">
+      <button class="btn btn-info account-info-button" (click)="togglePopup()">Account Information</button>
+      <button class="btn btn-info billings-info-button" (click)="toggleBillingPopup()">Billing History</button>
+      <button class="btn btn-info pay-info-button" (click)="togglePaymentPopup()">Subscription Details</button>
+    </div>
+  </div>
+</div>
+
+<!-- Sort Button -->
+<div class="sort-buttons">
+  <button class="btn btn-white sort-button" (click)="sortByMostRecent()">Sort by Most Recent</button>
+  <button class="btn btn-white sort-button" (click)="sortByTitle()">Sort Alphabetically</button>
+  <button class="btn btn-white sort-button" (click)="showLikedContent()">Show Liked</button>
+</div>
+
+<!-- Video Grid -->
+<div class="video-grid-container">
+  <div class="video-grid">
+    <div *ngFor="let video of videos" class="video-item">
+      <iframe
+        [src]="getVideoUrl(video.link)"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+      <h3>{{ video.title }}</h3>
+      <p>{{ video.rating }} &#9733;</p>
+      <p>Release Date: {{ video.releaseDate | date }}</p>
+      <div *ngIf="!isLiked(video)">
+        <button class="like-button" (click)="toggleLikedContent(video)">Like</button>
+      </div>
+      <div *ngIf="isLiked(video)">
+        <button class="like-button" (click)="toggleLikedContent(video)">Dislike</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Account Information Popup Modal -->
+<div class="popup popup-account-info" *ngIf="isPopupVisible && menuVisible">
+  <div class="popup-content">
+    <span class="close" (click)="togglePopup()">&times;</span>
+    <h2>Account Information</h2>
+    <div class="user-info">
+      <div class="info-item">
+        <span class="label"><strong>Username:</strong></span>
+        <span class="data">{{ user?.username }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label"><strong>Email:</strong></span>
+        <span class="data">{{ user?.email }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label"><strong>Password:</strong></span>
+        <span class="data">{{ user?.password }}</span>
+      </div>
+      <div class="info-item">
+        <span class="label"><strong>Last Payment Date (DD-MM-YYYY):</strong></span>
+        <span class="data">{{ user?.lastPaymentDate }}</span>
+      </div>
+    </div>
+    <button class="btn btn-danger delete-account-button" (click)="toggleDeletePopup()">Delete Account</button>
+  </div>
+</div>
+
+<!-- Delete Confirmation Popup Modal -->
+<div class="popup popup-delete" *ngIf="isDeletePopupVisible">
+  <div class="popup-content">
+    <span class="close" (click)="toggleDeletePopup()">&times;</span>
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete your account?</p>
+    <button class="btn btn-danger" (click)="confirmDeleteUser()">Yes</button>
+    <button class="btn btn-secondary" (click)="toggleDeletePopup()">No</button>
+  </div>
+</div>
+
+<!-- Billing Details Popup Modal -->
+<div class="popup popup-billings" *ngIf="isBillingPopupVisible && menuVisible">
+  <div class="popup-content">
+    <span class="close" (click)="toggleBillingPopup()">&times;</span>
+    <h2>Billing History</h2>
+    <ul *ngIf="billingDetails.length > 0">
+      <li *ngFor="let billing of billingDetails">
+        <p>Card Number: {{ billing.cardNo }}</p>
+        <p>Name: {{ billing.name }}</p>
+        <p>Date: {{ billing.transactionDate }}</p>
+        <hr>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- Subscription Details Popup Modal -->
+<div class="popup popup-edit-billings" *ngIf="isPaymentPopupVisible && menuVisible">
+  <div class="popup-content">
+    <span class="close" (click)="togglePaymentPopup()">&times;</span>
+    <h2>Subscription Details</h2>
+    <form *ngIf="formBillingDetails">
+      <div class="form-group">
+        <label for="cardNo">Card Number:</label>
+        <input type="text" id="cardNo" [(ngModel)]="formBillingDetails.cardNo" name="cardNo" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" [(ngModel)]="formBillingDetails.name" name="name" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" [(ngModel)]="formBillingDetails.cvv" name="cvv" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="transactionDate">Transaction Date:</label>
+        <input type="text" id="transactionDate" [(ngModel)]="todayDate" name="transactionDate" class="form-control" readonly />
+      </div>
+      <button type="button" class="btn btn-primary" (click)="addBillingIfAllowed()">Pay</button>
+      <div *ngIf="errorMessage" class="error-message">
+        <h3>{{ errorMessage }}</h3>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Additional CSS for the error message -->
+<style>
+  .error-message {
+    margin-top: 10px;
+    color: red;
+    text-align: center;
+  }
+</style>

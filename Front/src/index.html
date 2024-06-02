@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Platform</title>
+  <link
+    rel="icon"
+    href=
+      "icon%20streaming.webp"
+    type="image/x-icon"
+  />
+  <base href="/">
+  <script>
+    document.documentElement.style.setProperty('--vw', `${window.innerWidth}px`);
+    window.addEventListener('resize', () => {
+      document.documentElement.style.setProperty('--vw', `${window.innerWidth}px`);
+    });
+  </script>
+</head>
+<body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<app-root></app-root>
+</body>
+</html>

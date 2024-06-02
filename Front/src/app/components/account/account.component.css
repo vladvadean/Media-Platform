@@ -1,0 +1,432 @@
+/* Main menu styles */
+.menu {
+  position: fixed;
+  top: 0;
+  right: -300px; /* Hide off-screen */
+  width: 300px; /* Adjust as needed */
+  height: 100%;
+  background: #1c1c1c;
+  color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000; /* Ensure the menu is on top */
+  transition: right 0.4s ease-in-out; /* Transition effect */
+  overflow-y: auto; /* Enable vertical scroll */
+}
+
+.menu.show {
+  right: 0; /* Slide in */
+}
+
+.menu-content {
+  padding: 20px; /* Padding for the inner content */
+  max-height: 100%; /* Ensure it fits within the viewport */
+  overflow-y: auto; /* Enable vertical scroll */
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Button styles */
+.toggle-button, .close-button {
+  width: 30px; /* Square dimensions */
+  height: 30px; /* Square dimensions */
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px; /* Adjust font size for better appearance */
+  cursor: pointer;
+  z-index: 1001; /* Ensure the buttons are above the menu */
+  outline: none; /* Remove default outline */
+  padding: 0; /* Remove default padding */
+}
+
+.toggle-button:hover, .close-button:hover {
+  background-color: #3700b3;
+}
+
+.toggle-button {
+  position: fixed;
+  top: 40px;
+  right: 20px;
+}
+
+.billings-info-button {
+  background-color: #6200ea;
+  color: white;
+}
+
+.billings-info-button:hover {
+  background-color: #3700b3;
+}
+
+.button-list {
+  display: grid;
+  grid-gap: 30px;
+}
+
+.pay-info-button {
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.pay-info-button:hover {
+  background-color: #3700b3;
+}
+
+.account-info-button {
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.account-info-button:hover {
+  background-color: #3700b3;
+}
+
+.users-info-button {
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.users-info-button:hover {
+  background-color: #3700b3;
+}
+
+/* Sort button styles */
+.sort-button {
+  background-color: #6200ea;
+  color: white;
+  border: 1px solid black;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-bottom: 20px; /* Add margin to separate the button from the grid */
+  align-self: center; /* Align button to the center of the container */
+}
+
+.sort-button:hover {
+  background-color: #3700b3;
+}
+
+/* Video grid container */
+.video-grid-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 40px 0; /* Add margin to the top and bottom */
+  box-sizing: border-box;
+}
+
+/* Video grid styles */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.video-item {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #2c2c2c;
+  color: white;
+  text-align: center;
+}
+
+.video-item iframe {
+  width: 100%;
+  height: 200px;
+  border-radius: 5px;
+}
+
+.video-item h3 {
+  font-size: 1.2em;
+  margin: 10px 0 5px;
+}
+
+.video-item p {
+  font-size: 0.9em;
+  color: #666;
+}
+
+/* Popup Modal */
+
+.popup-billings, .popup-edit-billings, .popup-account-info, .popup-users, .popup-admins {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-height: 70%; /* Adjust the height as needed */
+  width: 40%; /* Adjust width as needed */
+  background: #1c1c1c;
+  color: white;
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Disable horizontal scrolling */
+  z-index: 2001; /* Ensure it's above the backdrop */
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+/* Adjusting popup sizes */
+.popup-billings {
+  max-height: 70%;
+  width: 40%;
+}
+
+.popup-edit-billings {
+  max-height: 80%; /* Adjust the height as needed */
+  width: 50%; /* Adjust width as needed */
+}
+
+.popup-account-info, .popup-users, .popup-admins {
+  max-height: 80%; /* Adjust the height as needed */
+  width: 50%; /* Adjust width as needed */
+}
+
+/* Popup content */
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between items */
+  position: relative;
+  background-color: transparent; /* Make background transparent to avoid layering issues */
+}
+
+.popup-content .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  background: none;
+  border: none;
+  color: white;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 10px; /* Space between label and data */
+  text-align: left; /* Align label text to left */
+}
+
+.data {
+  flex-grow: 1; /* Ensure the data spans the remaining space */
+  text-align: left; /* Align data text to left */
+}
+
+.delete-account-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.delete-account-button:hover {
+  background-color: #c82333;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-secondary {
+  background-color: #6200ea;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #3700b3;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center <li> elements horizontally */
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  margin: 20px 0;
+}
+
+li {
+  background-color: #18191A; /* Lighter gray background for user labels */
+  border: 1px solid #333;
+  border-radius: 15px;
+  padding: 15px;
+  margin: 10px auto; /* Center within parent */
+  width: 90%; /* Adjust width as needed */
+  max-width: 600px; /* Ensure list items do not get too wide */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: left; /* Align text to left */
+  overflow: hidden;
+  white-space: normal; /* Allow text to wrap */
+  word-wrap: break-word; /* Break long words if needed */
+}
+
+/* Center the save button within the form */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+/* Center the save button within the popup */
+.popup-content form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center elements horizontally */
+}
+
+.popup-content .btn-primary {
+  margin-top: 20px; /* Add some spacing from the form fields */
+}
+
+.btn-primary {
+  background: #6200ea;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #3700b3;
+}
+
+.delete-user {
+  background: red;
+  color: white;
+}
+
+.user-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px 0;
+  position: relative;
+}
+
+.user-details {
+  margin-bottom: 20px; /* Space for the button */
+}
+
+.delete-user {
+  align-self: center; /* Center the button horizontally */
+  position: absolute;
+  bottom: 10px; /* Position at the bottom */
+}
+
+/* Custom scrollbar for WebKit browsers (Chrome, Safari) */
+.popup-billings::-webkit-scrollbar,
+.popup-edit-billings::-webkit-scrollbar,
+.popup-account-info::-webkit-scrollbar,
+.popup-users::-webkit-scrollbar,
+.popup-admins::-webkit-scrollbar,
+.menu::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+.popup-billings::-webkit-scrollbar-track,
+.popup-edit-billings::-webkit-scrollbar-track,
+.popup-account-info::-webkit-scrollbar-track,
+.popup-users::-webkit-scrollbar-track,
+.popup-admins::-webkit-scrollbar-track,
+.menu::-webkit-scrollbar-track {
+  background: #1c1c1c; /* Background of the scrollbar track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+.popup-billings::-webkit-scrollbar-thumb,
+.popup-edit-billings::-webkit-scrollbar-thumb,
+.popup-account-info::-webkit-scrollbar-thumb,
+.popup-users::-webkit-scrollbar-thumb,
+.popup-admins::-webkit-scrollbar-thumb,
+.menu::-webkit-scrollbar-thumb {
+  background-color: #6200ea; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+  border: 3px solid #1c1c1c; /* Space around the thumb */
+}
+
+.popup-billings::-webkit-scrollbar-thumb:hover,
+.popup-edit-billings::-webkit-scrollbar-thumb:hover,
+.popup-account-info::-webkit-scrollbar-thumb:hover,
+.popup-users::-webkit-scrollbar-thumb:hover,
+.popup-admins::-webkit-scrollbar-thumb:hover,
+.menu::-webkit-scrollbar-thumb:hover {
+  background-color: #3700b3; /* Color of the thumb on hover */
+}
+
+/* Custom scrollbar for Firefox */
+.popup-billings, .popup-edit-billings, .popup-account-info, .popup-users, .popup-admins, .menu {
+  scrollbar-width: thin; /* Makes the scrollbar thinner */
+  scrollbar-color: #6200ea #1c1c1c; /* thumb color, track color */
+}
+
+/* Add Admin Popup Modal - Error Message */
+.add-admin-popup .error-message {
+  font-size: 1.2em; /* Make the error message bigger */
+  color: red; /* Error color */
+  text-align: center; /* Center align the error message */
+  margin-top: 10px; /* Spacing above the error message */
+}
+
+.sort-buttons {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 30px;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  padding-top: 800px;
+}
+
+.sort-button {
+  background-color: #6200ea;
+  color: white;
+  border: 1px solid black;
+  cursor: pointer;
+  margin-bottom: 20px; /* Add margin to separate the button from the grid */
+  align-self: center; /* Align button to the center of the container */
+  max-width: 200px;
+}
+
+.sort-button:hover {
+  background-color: #3700b3;
+}
+
+.like-button{
+  background: red;
+  color: white;
+}

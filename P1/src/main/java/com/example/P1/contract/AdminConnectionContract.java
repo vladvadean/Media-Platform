@@ -2,6 +2,8 @@ package com.example.P1.contract;
 
 import com.example.P1.model.Admin;
 import com.example.P1.model.Content;
+import com.example.P1.repository.AdminConnectionDB;
+import com.example.P1.service.AdminService;
 
 import java.util.List;
 
@@ -26,4 +28,8 @@ public interface AdminConnectionContract {
      * @return all the content added by the admin
      */
     public List<Content> getAllContentByAdminId(String adminId);
+
+    public Admin getAdminByUsername(String username);
+
+    public Admin findByUsernameAndPassword(String username,String password);
 }

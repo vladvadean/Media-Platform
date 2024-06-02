@@ -1,5 +1,6 @@
 package com.example.P1.contract;
 
+import com.example.P1.model.Content;
 import com.example.P1.model.LikedContent;
 
 import java.util.List;
@@ -38,5 +39,7 @@ public interface LikedContentConnectionContract {
 
     public LikedContent updateLikedContent(LikedContent likedContent);
 
-    LikedContent getLikedContentById(String id);
+    public LikedContent getLikedContentById(String id);
+
+    public List<Content> getContentByUser(String userId);
 }

@@ -5,6 +5,7 @@ import com.example.P1.model.Content;
 import com.example.P1.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -32,4 +33,9 @@ public interface UserConnectionDB extends JpaRepository<User, String> {
      */
     @Query("SELECT c FROM User u JOIN LikedContent lc ON u.id = lc.userId JOIN Content c ON lc.contentId = c.id WHERE u.id = :userId")
     Optional<List<Content>> getAllLikedContentByUser(String userId);
+
+    @Query("SELECT u FROM User u WHERE u.email = :email AND u.password = :password")
+    Optional<User> findByEmailAndPassword(String email, String password);
+
+    Optional<User> findByEmail(String s);
 }

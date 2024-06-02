@@ -17,6 +17,8 @@ import java.util.UUID;
  * communication between the http requests and application
  * responsible for content type requests
  */
+
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/content")
 public class ContentResources {
@@ -33,13 +35,13 @@ public class ContentResources {
     @GetMapping("/all")
     public ResponseEntity<List<Content>> getAllContent() {
         List<Content> content = contentService.getAllContent();
-        return new ResponseEntity<>(content, HttpStatus.FOUND);
+        return new ResponseEntity<>(content, HttpStatus.OK);
     }
 
     @GetMapping("find/{id}")
     public ResponseEntity<Content> getContentById(@PathVariable("id") String id) {
         Content content = contentService.getContentById(id);
-        return new ResponseEntity<>(content, HttpStatus.FOUND);
+        return new ResponseEntity<>(content, HttpStatus.OK);
     }
 
     @PostMapping("/add")
@@ -47,7 +49,7 @@ public class ContentResources {
         content.setId(UUID.randomUUID().toString());
             Content content1 = contentService.addContent(content);
         
-        return new ResponseEntity<>(content1, HttpStatus.CREATED);
+        return new ResponseEntity<>(content1, HttpStatus.OK);
     }
 
     @PutMapping("/update")
@@ -70,6 +72,12 @@ public class ContentResources {
     @GetMapping("/getAllUsersThatLiked/{contentId}")
     public ResponseEntity<?> getAllUsersThatLiked(@PathVariable("contentId") String contentId){
         List<User> userList = contentService.getAllUsersThatLiked(contentId);
-        return new ResponseEntity<>(userList,HttpStatus.FOUND);
+        return new ResponseEntity<>(userList,HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllContentAdmin/{adminId}")
+    public ResponseEntity<?> getAllContentAdmin(@PathVariable("adminId") String adminId){
+        List<Content> contentList = contentService.getAllContentAdmin(adminId);
+        return new ResponseEntity<>(contentList,HttpStatus.OK);
     }
 }

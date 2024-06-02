@@ -59,6 +59,11 @@ public class ContentService implements ContentConnectionContract, Observable {
     }
 
     @Override
+    public List<Content> getAllContentAdmin(String adminId) {
+        return contentConnectionDB.getAllContentAdmin(adminId).orElseThrow(() -> new ItemNotFoundException("Admin by id " + adminId + " did not add anything"));
+    }
+
+    @Override
     public void deleteContentById(String id) {
         contentConnectionDB.deleteById(id);
     }

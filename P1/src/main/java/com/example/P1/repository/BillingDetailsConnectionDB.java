@@ -5,6 +5,7 @@ import com.example.P1.model.BillingDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 /**
  * interface contains the implemented methods in JpaRepository
@@ -12,5 +13,5 @@ import java.util.Optional;
  */
 @Repository
 public interface BillingDetailsConnectionDB extends JpaRepository<BillingDetails,String> {
-    Optional<BillingDetails> findBillingDetailsByUserId(String userId);
+    Optional<List<BillingDetails>> findBillingDetailsByUserId(String userId);
 }

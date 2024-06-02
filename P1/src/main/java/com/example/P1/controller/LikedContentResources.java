@@ -16,6 +16,8 @@ import java.util.UUID;
  * communication between the http requests and application
  * responsible for liked content type requests
  */
+
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/likedContent")
 public class LikedContentResources {
@@ -31,13 +33,13 @@ public class LikedContentResources {
     @GetMapping("/all")
     public ResponseEntity<List<LikedContent>> getAllLikedContent() {
         List<LikedContent> likedContent = likedContentService.getAllLikedContent();
-        return new ResponseEntity<>(likedContent, HttpStatus.FOUND);
+        return new ResponseEntity<>(likedContent, HttpStatus.OK);
     }
 
     @GetMapping("find/{id}")
     public ResponseEntity<LikedContent> getContentById(@PathVariable("id") String id) {
         LikedContent likedContent = likedContentService.getLikedContentById(id);
-        return new ResponseEntity<>(likedContent, HttpStatus.FOUND);
+        return new ResponseEntity<>(likedContent, HttpStatus.OK);
     }
 
     /**
@@ -48,7 +50,7 @@ public class LikedContentResources {
     @GetMapping("findUser/{userId}")
     public ResponseEntity<List<LikedContent>> getLikedContentByUserId(@PathVariable("userId") String userId) {
         List<LikedContent> likedContent = likedContentService.getAllLikedContentByUserId(userId);
-        return new ResponseEntity<>(likedContent, HttpStatus.FOUND);
+        return new ResponseEntity<>(likedContent, HttpStatus.OK);
     }
 
     /**
@@ -59,7 +61,14 @@ public class LikedContentResources {
     @GetMapping("findContent/{contentId}")
     public ResponseEntity<List<LikedContent>> getLikedContentByContentId(@PathVariable("contentId") String contentId) {
         List<LikedContent> likedContent = likedContentService.getAllLikedContentByContentId(contentId);
-        return new ResponseEntity<>(likedContent, HttpStatus.FOUND);
+        return new ResponseEntity<>(likedContent, HttpStatus.OK);
+    }
+
+
+    @GetMapping("findUserContent/{userId}")
+    public ResponseEntity<List<Content>> getContentByUser(@PathVariable("userId") String userId) {
+        List<Content> content = likedContentService.getContentByUser(userId);
+        return new ResponseEntity<>(content, HttpStatus.OK);
     }
 
     /**
@@ -71,7 +80,7 @@ public class LikedContentResources {
     @GetMapping("findUserContent/{userId}/{contentId}")
     public ResponseEntity<LikedContent> getLikedContentByUserContentId(@PathVariable("userId") String userId, @PathVariable("contentId") String cotentId) {
         LikedContent likedContent = likedContentService.getLikedContentByUserContentId(userId, cotentId);
-        return new ResponseEntity<>(likedContent, HttpStatus.FOUND);
+        return new ResponseEntity<>(likedContent, HttpStatus.OK);
     }
 
     @PostMapping("/add")
@@ -79,7 +88,7 @@ public class LikedContentResources {
         likedContent.setId(UUID.randomUUID().toString());
         LikedContent likedContent1 = likedContentService.addLikedContent(likedContent);
 
-        return new ResponseEntity<>(likedContent1, HttpStatus.CREATED);
+        return new ResponseEntity<>(likedContent1, HttpStatus.OK);
     }
 
     @PutMapping("/update")

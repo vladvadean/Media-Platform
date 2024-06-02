@@ -1,6 +1,7 @@
 package com.example.P1.service;
 
 import com.example.P1.contract.LikedContentConnectionContract;
+import com.example.P1.model.Content;
 import com.example.P1.model.ItemNotFoundException;
 import com.example.P1.model.LikedContent;
 import com.example.P1.repository.LikedContentConnectionDB;
@@ -73,6 +74,12 @@ public class LikedContentService implements LikedContentConnectionContract {
         return likedContentConnectionDB.findLikedContentById(id).orElseThrow(() -> new ItemNotFoundException("Liked content by id " + id + " was not found"));
     }
 
+    @Override
+    public List<Content> getContentByUser(String userId) {
+        return likedContentConnectionDB.getContentByUser(userId).orElseThrow
+                (() -> new ItemNotFoundException("This user did not like any content"));
+    }
+
     /**
      * implement the method that returns all entries of liked content by user id and content id
      * @param userId user id
@@ -82,6 +89,6 @@ public class LikedContentService implements LikedContentConnectionContract {
     @Override
     public LikedContent getLikedContentByUserContentId(String userId, String contentId) {
         return likedContentConnectionDB.findLikedContentByUserContentId(userId, contentId).orElseThrow
-                (() -> new ItemNotFoundException("Liked content by user id " + userId + " and content id " + contentId));
+                (() -> new ItemNotFoundException("Liked content by user id " + userId + " and content id " + contentId + " not found"));
     }
 }

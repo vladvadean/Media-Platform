@@ -1,0 +1,224 @@
+<div class="container">
+  <!-- Your existing HTML content -->
+  <!-- Toggle Menu Button -->
+  <button *ngIf="!menuVisible" (click)="toggleMenu()" class="btn btn-primary toggle-button">{{ getInitial() }}</button>
+
+
+  <!-- Menu -->
+  <div class="menu" [ngClass]="{ 'show': menuVisible }">
+    <div class="menu-content">
+      <div class="menu-header">
+        <h2>Admin Menu</h2>
+        <button (click)="toggleMenu()" class="btn btn-secondary close-button">{{ getInitial() }}</button>
+      </div>
+      <div class="button-list">
+        <button class="btn btn-info account-info-button" (click)="toggleAccountPopup()">Account Information</button>
+        <button class="btn btn-info users-info-button" (click)="toggleUsersPopup()">Manage Users</button>
+        <button class="btn btn-info users-info-button" (click)="toggleAdminsPopup()">Manage Admins</button>
+        <button class="btn btn-info add-content-button" (click)="toggleAddContentPopup()">Add Content</button>
+        <button class="btn btn-info my-content-button" (click)="toggleMyContentPopup()">My Added Content</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sort Button -->
+  <div class="sort-buttons">
+    <button class="btn btn-white sort-button" (click)="sortByMostRecent()">Sort by Most Recent</button>
+    <button class="btn btn-white sort-button" (click)="sortByTitle()">Sort Alphabetically</button>
+  </div>
+
+  <!-- My Content Popup Modal -->
+  <div class="popup-my-content" *ngIf="myContentPopup && menuVisible">
+    <div class="popup-content">
+      <span class="close" (click)="toggleMyContentPopup()">&times;</span>
+      <h2>My Added Content</h2>
+      <ul *ngIf="myContent.length > 0">
+        <li *ngFor="let content of myContent" class="content-item">
+          <div class="content-details">
+            <p>ID: {{ content.id }}</p>
+            <p>Title: {{ content.title }}</p>
+            <p>Rating: {{ content.rating }}</p>
+            <p>Link: <a [href]="content.link" target="_blank">{{ content.link }}</a></p>
+          </div>
+          <button class="delete-content" (click)="toggleDeleteContentPopup(content)">Delete</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Popup Modal for Content -->
+  <div class="popup-delete" *ngIf="deleteContentPopup">
+    <div class="popup-content">
+      <span class="close" (click)="toggleDeleteContentPopup(null)">&times;</span>
+      <h2>Confirm Deletion</h2>
+      <p>Are you sure you want to delete this content?</p>
+      <button class="btn btn-danger" (click)="confirmDeleteContent()">Yes</button>
+      <button class="btn btn-secondary" (click)="toggleDeleteContentPopup(null)">No</button>
+    </div>
+  </div>
+
+  <!-- Video Grid -->
+  <div class="video-grid-container">
+    <div class="video-grid">
+      <div *ngFor="let video of videos" class="video-item">
+        <iframe
+          [src]="getVideoUrl(video.link)"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+        <h3>{{ video.title }}</h3>
+        <p>{{ video.rating }} &#9733;</p>
+        <p>Release Date: {{ video.releaseDate | date }}</p> <!-- Display release date -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Content Popup Modal -->
+  <div class="popup-add" *ngIf="addContentPopup">
+    <div class="popup-content">
+      <span class="close" (click)="toggleAddContentPopup()">&times;</span>
+      <h2>Add New Content</h2>
+      <form (ngSubmit)="addContent()">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input id="title" [(ngModel)]="newContent.title" name="title" required/>
+        </div>
+        <div class="form-group">
+          <label for="link">Link</label>
+          <input id="link" [(ngModel)]="newContent.link" name="link" required/>
+        </div>
+        <div class="form-group">
+          <label for="rating">Rating</label>
+          <input id="rating" type="number" [(ngModel)]="newContent.rating" name="rating" required/>
+        </div>
+        <button class="btn btn-primary" type="submit">Add Content</button>
+        <label class="error-message">{{ contentErrorMessage }}</label>
+      </form>
+    </div>
+  </div>
+
+  <!-- Other popups and modals... -->
+
+  <!-- Account Information Popup Modal -->
+  <div class="popup-account-info" *ngIf="accountPopup && menuVisible">
+    <div class="popup-content">
+      <span class="close" (click)="toggleAccountPopup()">&times;</span>
+      <h2>Account Information</h2>
+      <div class="user-info">
+        <div class="info-item">
+          <span class="label"><strong>Name:</strong></span>
+          <span class="data">{{ admin?.name }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label"><strong>Username:</strong></span>
+          <span class="data">{{ admin?.username }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label"><strong>Password:</strong></span>
+          <span class="data">{{ admin?.password }}</span>
+        </div>
+        <div class="info-item">
+          <span class="label"><strong>ID:</strong></span>
+          <span class="data">{{ admin?.id }}</span>
+        </div>
+      </div>
+      <button class="btn btn-danger delete-account-button" (click)="toggleDeletePopup()">Delete Account</button>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Popup Modal -->
+  <div class="popup-delete" *ngIf="deletePopup">
+    <div class="popup-content">
+      <span class="close" (click)="toggleDeletePopup()">&times;</span>
+      <h2>Confirm Deletion</h2>
+      <p>Are you sure you want to delete your account?</p>
+      <button class="btn btn-danger" (click)="confirmDeleteAdmin()">Yes</button>
+      <button class="btn btn-secondary" (click)="toggleDeletePopup()">No</button>
+    </div>
+  </div>
+
+  <!-- Users Popup Modal -->
+  <div class="popup-users" *ngIf="usersPopup && menuVisible">
+    <div class="popup-content">
+      <span class="close" (click)="toggleUsersPopup()">&times;</span>
+      <h2>Manage Users</h2>
+      <ul *ngIf="users.length > 0">
+        <li *ngFor="let user of users" class="user-item">
+          <div class="user-details">
+            <p>ID: {{ user.id }}</p>
+            <p>Email: {{ user.email }}</p>
+            <p>Username: {{ user.username }}</p>
+            <p>Last Payment Date: {{ user.lastPaymentDate }}</p>
+          </div>
+          <button class="delete-user" (click)="toggleDeleteUserPopup(user)">Delete</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Popup Modal for Users -->
+  <div class="popup-delete" *ngIf="deleteUserPopup">
+    <div class="popup-content">
+      <span class="close" (click)="toggleDeleteUserPopup(null)">&times;</span>
+      <h2>Confirm Deletion</h2>
+      <p>Are you sure you want to delete this user?</p>
+      <button class="btn btn-danger" (click)="confirmDeleteUser()">Yes</button>
+      <button class="btn btn-secondary" (click)="toggleDeleteUserPopup(null)">No</button>
+    </div>
+  </div>
+
+  <!-- Admins Popup Modal -->
+  <div class="popup-admins" *ngIf="adminsPopup && menuVisible">
+    <div class="popup-content">
+      <span class="close" (click)="toggleAdminsPopup()">&times;</span>
+      <h2>Manage Admins</h2>
+      <ul *ngIf="admins.length > 0">
+        <li *ngFor="let admin of admins" class="user-item">
+          <div class="user-details">
+            <p>ID: {{ admin.id }}</p>
+            <p>Username: {{ admin.username }}</p>
+            <p>Name: {{ admin.name }}</p>
+          </div>
+          <button class="delete-user" (click)="toggleDeleteAdminPopup(admin)">Delete</button>
+        </li>
+      </ul>
+      <button class="btn btn-info users-info-button" (click)="toggleAddAdminPopup()">Add Admin</button>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Popup Modal for Admins -->
+  <div class="popup-delete" *ngIf="deleteAdminPopup">
+    <div class="popup-content">
+      <span class="close" (click)="toggleDeleteAdminPopup(null)">&times;</span>
+      <h2>Confirm Deletion</h2>
+      <p>Are you sure you want to delete this admin?</p>
+      <button class="btn btn-danger" (click)="confirmDeleteAdminList()">Yes</button>
+      <button class="btn btn-secondary" (click)="toggleDeleteAdminPopup(null)">No</button>
+    </div>
+  </div>
+
+  <!-- Add Admin Popup Modal -->
+  <div class="popup-add" *ngIf="addAdminPopup">
+    <div class="popup-content">
+      <span class="close" (click)="toggleAddAdminPopup()">&times;</span>
+      <h2>Add New Admin</h2>
+      <form (ngSubmit)="addAdmin()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input id="username" [(ngModel)]="newAdmin.username" name="username" required/>
+        </div>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id="name" [(ngModel)]="newAdmin.name" name="name" required/>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" [(ngModel)]="newAdmin.password" name="password" required/>
+        </div>
+        <button class="btn btn-primary" type="submit">Add Admin</button>
+        <label class="error-message">{{ errorMessage }}</label>
+      </form>
+    </div>
+  </div>
+</div>

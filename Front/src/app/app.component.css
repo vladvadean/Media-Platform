@@ -1,0 +1,30 @@
+/* app.component.css */
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: #f6f5f7;
+}
+
+.logo {
+  width: 50px; /* Adjust the size as needed */
+  height: auto;
+  margin-right: 20px;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.menu li {
+  margin: 0;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}

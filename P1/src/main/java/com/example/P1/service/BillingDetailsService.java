@@ -27,7 +27,7 @@ public class BillingDetailsService implements BillingDetailsConnectionContract {
         this.billingDetailsConnectionDB = billingDetailsConnectionDB;
     }
     @Override
-    public BillingDetails getBillingDetailsById(String id) {
+    public List<BillingDetails> getBillingDetailsById(String id) {
         return billingDetailsConnectionDB.findBillingDetailsByUserId(id).orElseThrow(() -> new ItemNotFoundException("Billing details by user id " + id + " was not found"));
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
  * to make CRUD billing details operations are implemented
  */
 public interface BillingDetailsConnectionContract {
-    public BillingDetails getBillingDetailsById(String id);
+    public List<BillingDetails> getBillingDetailsById(String id);
 
     public List<BillingDetails> getAllBillingDetails();
 

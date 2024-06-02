@@ -24,4 +24,10 @@ public interface AdminConnectionDB extends JpaRepository<Admin, String> {
      */
     @Query("SELECT c FROM Admin a JOIN Content c ON a.id = c.adminId WHERE a.id = :adminId")
     Optional<List<Content>> getAllContentByAdminId(String adminId);
+
+    Optional<Admin> getAdminByUsername(String username);
+
+    @Query("SELECT a FROM Admin a WHERE a.username = :username AND a.password = :password")
+    Optional<Admin> getAdminByUsernameAndPassword(String username,String password);
+
 }

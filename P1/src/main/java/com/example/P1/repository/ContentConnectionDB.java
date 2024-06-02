@@ -1,5 +1,6 @@
 package com.example.P1.repository;
 
+import com.example.P1.model.Admin;
 import com.example.P1.model.Content;
 import com.example.P1.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,4 +24,7 @@ public interface ContentConnectionDB extends JpaRepository<Content, String> {
      */
     @Query("SELECT u FROM  Content c JOIN LikedContent lc ON c.id=lc.contentId JOIN User u ON u.id = lc.userId WHERE c.id = :contentId")
     Optional<List<User>> getAllUserThatLiked(String contentId);
+
+    @Query("SELECT c FROM  Content c WHERE c.adminId = :adminId")
+    Optional<List<Content>> getAllContentAdmin(String adminId);
 }

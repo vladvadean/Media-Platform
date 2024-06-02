@@ -1,0 +1,14 @@
+<div class=monitor-container>
+    <h1>Home</h1>
+    <button (click)="getAllUsers()">Fetch All Users</button>
+    <button routerLink="/signIn">Go to Sign In</button>
+    <ul *ngIf="users.length > 0">
+      <li *ngFor="let user of users">
+        <p>ID: {{ user.id }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Username: {{ user.username }}</p>
+        <p>Last Payment Date: {{ user.lastPaymentDate | date }}</p>
+        <hr>
+      </li>
+    </ul>
+</div>

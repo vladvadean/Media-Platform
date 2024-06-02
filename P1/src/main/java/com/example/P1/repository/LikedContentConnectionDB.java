@@ -1,5 +1,6 @@
 package com.example.P1.repository;
 
+import com.example.P1.model.Content;
 import com.example.P1.model.LikedContent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,5 +27,8 @@ public interface LikedContentConnectionDB extends JpaRepository<LikedContent, St
     Optional<List<LikedContent>>findLikedContentByUserId(String userId);
 
     Optional<List<LikedContent>>findLikedContentByContentId(String contentId);
+
+    @Query("SELECT c FROM LikedContent lc JOIN Content c ON c.id = lc.contentId WHERE lc.userId = :userId")
+    Optional<List<Content>>getContentByUser(String userId);
 
 }

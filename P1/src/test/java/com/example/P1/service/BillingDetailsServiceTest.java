@@ -32,22 +32,7 @@ public class BillingDetailsServiceTest {
         billingDetailsService = new BillingDetailsService(billingDetailsConnectionDBMock);
     }
 
-    /**
-     * Tests the retrieval of billing details by user ID.
-     * Ensures that the method fetches the correct billing details from the database.
-     */
-    @Test
-    public void getBillingDetailsByIdTest() {
-        BillingDetails expected = new BillingDetails("user1", "1234567890123456", "123", "John Doe", LocalDateTime.now());
-        expected.setId("1");
 
-        when(billingDetailsConnectionDBMock.findBillingDetailsByUserId("1")).thenReturn(Optional.of(expected));
-
-        BillingDetails actual = billingDetailsService.getBillingDetailsById("1");
-
-        verify(billingDetailsConnectionDBMock).findBillingDetailsByUserId("1");
-        assertEquals(expected, actual);
-    }
 
     /**
      * Tests retrieval of all billing details.

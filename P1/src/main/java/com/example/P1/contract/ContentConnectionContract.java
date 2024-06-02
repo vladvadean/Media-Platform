@@ -26,4 +26,6 @@ public interface ContentConnectionContract {
      * @return the list of users that liked the content
      */
     public List<User> getAllUsersThatLiked(String contentId);
+
+    public List<Content> getAllContentAdmin(String adminId);
 }

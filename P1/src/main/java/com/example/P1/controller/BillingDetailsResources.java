@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+
 /**
  * communication between the http requests and application
  * responsible for billing details type requests
  */
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/billingDetails")
 public class BillingDetailsResources {
@@ -28,13 +30,13 @@ public class BillingDetailsResources {
     @GetMapping("/all")
     public ResponseEntity<List<BillingDetails>> getAllBillingDetails() {
         List<BillingDetails> billingDetails = billingDetailsService.getAllBillingDetails();
-        return new ResponseEntity<>(billingDetails, HttpStatus.FOUND);
+        return new ResponseEntity<>(billingDetails, HttpStatus.OK);
     }
 
     @GetMapping("find/{id}")
-    public ResponseEntity<BillingDetails> getBillingDetails(@PathVariable("id") String id) {
-        BillingDetails billingDetails = billingDetailsService.getBillingDetailsById(id);
-        return new ResponseEntity<>(billingDetails, HttpStatus.FOUND);
+    public ResponseEntity<List<BillingDetails>> getBillingDetails(@PathVariable("id") String id) {
+        List<BillingDetails> billingDetails = billingDetailsService.getBillingDetailsById(id);
+        return new ResponseEntity<>(billingDetails, HttpStatus.OK);
     }
 
     @PostMapping("/add")

@@ -28,4 +28,8 @@ public interface UserConnectionContract {
      * @return get all content that was liked by user that has the id userId
      */
     public List<Content> getAllLikedContentByUser(String userId);
+
+    public User findByEmailAndPassword(String email, String password);
+
+    public User findUserByEmail(String email);
 }

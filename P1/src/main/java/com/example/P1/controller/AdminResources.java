@@ -3,6 +3,8 @@ package com.example.P1.controller;
 import com.example.P1.contract.AdminConnectionContract;
 import com.example.P1.model.Admin;
 import com.example.P1.model.Content;
+import com.example.P1.model.SignInRequest;
+import com.example.P1.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.UUID;
  * communication between the http requests and application
  * responsible for admin type requests
  */
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/admin")
 public class AdminResources {
@@ -31,13 +34,29 @@ public class AdminResources {
     @GetMapping("/all")
     public ResponseEntity<List<Admin>> getAllAdmins() {
         List<Admin> admins = adminService.getAllAdmins();
-        return new ResponseEntity<>(admins, HttpStatus.FOUND);
+        return new ResponseEntity<>(admins, HttpStatus.OK);
     }
 
     @GetMapping("find/{id}")
     public ResponseEntity<Admin> getAdminById(@PathVariable("id") String id) {
         Admin admin = adminService.getAdminById(id);
-        return new ResponseEntity<>(admin, HttpStatus.FOUND);
+        return new ResponseEntity<>(admin, HttpStatus.OK);
+    }
+
+    @GetMapping("username/{username}")
+    public ResponseEntity<Admin> getAdminByUsername(@PathVariable("username") String username) {
+        Admin admin = adminService.getAdminByUsername(username);
+        return new ResponseEntity<>(admin, HttpStatus.OK);
+    }
+
+    @PostMapping("/sign-in")
+    public ResponseEntity<?> signIn(@RequestBody SignInRequest signInRequest) {
+        Admin admin = adminService.findByUsernameAndPassword(signInRequest.getEmail(), signInRequest.getPassword());
+        if (admin != null) {
+            return new ResponseEntity<>(admin, HttpStatus.OK); // or return a token instead of the user object
+        } else {
+            return new ResponseEntity<>("Invalid email or password", HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @PostMapping("/add")
