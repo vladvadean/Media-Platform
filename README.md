@@ -2,6 +2,7 @@
 
 
 
+
 # Media Platform Development Documentation
 
 ## Table of Contents
@@ -16,6 +17,7 @@
 7. [Endpoint Documentation](#endpoint-documentation)
 8. [User Guide](#user-guide)
 9. [Admin Guide](#admin-guide)
+10. [Front End](#front-end) 
 11. [Testing](#testing)
 12. [Troubleshooting](#troubleshooting)
 13. [Future Work](#future-work)
@@ -360,20 +362,78 @@ This section provides detailed documentation of all API endpoints associated wit
 
   &nbsp; &nbsp;&nbsp; &nbsp;The password and the name are required for the admin to login. Again the username will only will be used to display his digital persona. In case any user has malicious intents he will be deleted. Any other problem such as the payment of the subscription to be reevaluated manually should be a task for the admin. Having such power an admin should be the only one that can add another admins and the only to remove or add content.
 ## Front End
-  &nbsp; &nbsp;&nbsp; &nbsp; The front is divided in components, models and services. The default port for the front end is the 8081 port.
-  ### Models
-   &nbsp; &nbsp;&nbsp; &nbsp; Represent the logical structure of all entities containing all attributes and properties
+
+&nbsp; &nbsp;&nbsp; &nbsp; The front end of the Media Platform is designed to provide a seamless and intuitive user experience. It is divided into three main parts: Models, Services, and Components. The default port for the front end is 8081.
+
+### Models
+
+&nbsp; &nbsp;&nbsp; &nbsp; Models represent the logical structure of all entities, containing all attributes and properties. These include:
+
+- **UserModel**: Represents user-related data such as email, username, password, and subscription details.
+- **ContentModel**: Represents the content available on the platform, including attributes like title, description, genre, and upload details.
+- **AdminModel**: Represents admin-related data including username, password, and permissions.
+- **BillingDetailsModel**: Represents billing details for user subscriptions, including payment history and billing cycles.
+- **LikedContentModel**: Represents the relationship between users and the content they have liked.
+
 ### Services
-   &nbsp; &nbsp;&nbsp; &nbsp; Services contains all the files dedicated for the http requests between the front end and the back end. All the http request used in this project to communicate with back end are found in the services class, each unique for the model it corresponds to.
-### Componets
-&nbsp; &nbsp;&nbsp; &nbsp; Components are the different steps represented in visual changes during the usage of the app.
-So we have the: 
-- signInSignUp component
-&nbsp; &nbsp;&nbsp; &nbsp; Meant for the first window when opening the app. It is meant for both users and admins to log in and use the app. If a new user does not have an account already he can create one by filling up a form requiring: email, username, and password. The email used as a primary key for users and the username is used as a primary key for admins, so if the username or email repeats, a red error message will be displayed under the button, letting the user know the authentication did not work.
-- account component
-&nbsp; &nbsp;&nbsp; &nbsp; Account component is the account display used by the user to utilize the application. Here he can find information such as account credentials, payment history and can pay the new subscription. Other than that the user can play videos, sort them by more criterias. Bonus the user can add a video to his favorite by pressing the like button, once the button was pressed it will turn into a dislike button and if pressed again it will remove the video from his favorites. Both account have the possibilities to delete their own accounts.
-- adminAccount component
-&nbsp; &nbsp;&nbsp; &nbsp; This component is similar to the account one but the admin has more functional possibilities such as removing users, adding admins, add new content, and remove content that he added. The admin instead of using his email in the email field in the sign in menu he must use his username. As mentioned before the admin usernames must be unique so if adding a new admin with the a username already in use, an error message will be displayed in the pop-up. Both account have the possibilities to delete their own accounts.
+
+&nbsp; &nbsp;&nbsp; &nbsp; Services contain all the files dedicated to the HTTP requests between the front end and the back end. Each service corresponds to a specific model and includes methods to perform CRUD operations and other interactions. The services include:
+
+- **UserService**: Handles all user-related HTTP requests such as registration, login, fetching user details, and managing subscriptions.
+- **ContentService**: Manages content-related HTTP requests including fetching, adding, updating, and deleting content.
+- **AdminService**: Deals with admin-related HTTP requests, including admin login, adding new admins, and managing content and users.
+- **BillingDetailsService**: Handles HTTP requests related to billing details, including fetching billing history and updating billing information.
+- **LikedContentService**: Manages HTTP requests related to liked content, such as fetching liked content for a user and adding/removing likes.
+
+### Components
+
+&nbsp; &nbsp;&nbsp; &nbsp; Components represent the different steps and visual changes during the usage of the app. They provide the user interface for interacting with the application. The main components include:
+
+- **SignInSignUpComponent**: 
+  - This is the first window when opening the app. It is used by both users and admins to log in and use the app. If a new user does not have an account, they can create one by filling out a form requiring email, username, and password. If the email or username already exists, a red error message will be displayed under the button, indicating that the authentication did not work.
+
+- **AccountComponent**: 
+  - This component is the main account interface for users. It displays account credentials, payment history, and allows users to manage their subscriptions. Users can browse and play videos, sort them by various criteria, and add videos to their favorites by pressing the like button. Once a video is liked, the button turns into a dislike button, allowing users to remove the video from their favorites if pressed again. Users can also delete their own accounts from this component.
+
+- **AdminAccountComponent**: 
+  - This component is similar to the AccountComponent but includes additional functionalities for admins. Admins can remove users, add new admins, and manage content (add/remove content). Admins must use their username to log in instead of their email. If an admin tries to add a new admin with a username that already exists, an error message will be displayed. Both admins and users can delete their own accounts.
+
+### SignInSignUpComponent
+
+- **Description**: Handles user and admin authentication. Allows new users to register.
+- **Fields**: Email, username, password.
+- **Functions**: 
+  - `login()`: Authenticates the user or admin.
+  - `register()`: Registers a new user.
+  - `showError(message)`: Displays error messages.
+
+### AccountComponent
+
+- **Description**: Main interface for users.
+- **Fields**: User details, payment history, list of liked content.
+- **Functions**: 
+  - `fetchUserDetails()`: Fetches the logged-in user's details.
+  - `fetchPaymentHistory()`: Retrieves the user's payment history.
+  - `likeContent(contentId)`: Likes a content item.
+  - `dislikeContent(contentId)`: Removes a content item from favorites.
+  - `deleteAccount()`: Deletes the user's account.
+
+### AdminAccountComponent
+
+- **Description**: Main interface for admins.
+- **Fields**: Admin details, list of users, list of content.
+- **Functions**: 
+  - `fetchAdminDetails()`: Fetches the logged-in admin's details.
+  - `addAdmin(adminData)`: Adds a new admin.
+  - `removeUser(userId)`: Deletes a user by ID.
+  - `addContent(contentData)`: Adds new content.
+  - `removeContent(contentId)`: Deletes content by ID.
+  - `deleteAccount()`: Deletes the admin's account.
+
+![signin](https://github.com/vladvadean/Media-Platform/assets/126804850/9b5642bc-e11d-41e0-aa56-04f845d246a1)
+![admin account](https://github.com/vladvadean/Media-Platform/assets/126804850/7efde784-abc0-4438-bc2f-dee4ca3e6318)
+![account](https://github.com/vladvadean/Media-Platform/assets/126804850/dfe14dd5-c2e1-4e42-be66-38d2f369c14f)
+
 
 ![signin](https://github.com/vladvadean/Media-Platform/assets/126804850/9b5642bc-e11d-41e0-aa56-04f845d246a1)
 ![admin account](https://github.com/vladvadean/Media-Platform/assets/126804850/7efde784-abc0-4438-bc2f-dee4ca3e6318)
