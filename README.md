@@ -1,6 +1,7 @@
 
 
 
+
 # Media Platform Development Documentation
 
 ## Table of Contents
@@ -99,7 +100,13 @@ This section provides detailed documentation of all API endpoints associated wit
 - **POST** `/admin/add`
 - **Description**: Adds a new admin.
 - **Request Body**: JSON object containing admin details.
-- **Response**: `201 Created` with created admin details in JSON.
+- **Response**: `200 OK` with created admin details in JSON.
+
+#### Sign in Admin
+- **POST** `/sign-in`
+- **Description**: Request used for front end sign in.
+- **Request Body**: JSON object containing username and password.
+- **Response**: `200 OK` .
 
 #### Update Admin
 - **PUT** `/admin/update`
@@ -112,7 +119,7 @@ This section provides detailed documentation of all API endpoints associated wit
 - **DELETE** `/admin/delete{id}`
 - **Description**: Deletes an admin by ID.
 - **Path Variable**: `id` - The ID of the admin to delete.
-- **Response**: `204 No Content`
+- **Response**: `200 OK`
 
 #### Get All Content
 - **GET** `/admin/getContent/{adminId}`
@@ -137,7 +144,7 @@ This section provides detailed documentation of all API endpoints associated wit
 - **POST** `/content/add`
 - **Description**: Adds a new content item.
 - **Request Body**: JSON object containing content details.
-- **Response**: `201 Created` with created content details in JSON.
+- **Response**: `200 OK` with created content details in JSON.
 
 #### Update Content
 - **PUT** `/content/update`
@@ -150,13 +157,19 @@ This section provides detailed documentation of all API endpoints associated wit
 - **DELETE** `/content/delete/{id}`
 - **Description**: Deletes a content item by its ID.
 - **Path Variable**: `id` - The ID of the content to delete.
-- **Response**: `204 No Content`
+- **Response**: `200 OK`
 
 #### Get User That Liked Content
 - **GET** `/content/getAllUsersThatLiked/{contentId}`
 - **Description**: Gets all the users that liked the content with contentId.
 - **Path Variable**: `contentId` - The ID of the content to get users.
-- **Response**: `200 OK`
+- **Response**: `200 OK` with a list of users.
+
+#### Get All Content Added By The Admin
+- **GET** `/content/getAllContentAdmin/{adminId}`
+- **Description**: Gets all the content that the admin with adminId added.
+- **Path Variable**: `adminId` - The ID of the admin that added the content.
+- **Response**: `200 OK` with a list of content.
 
 ### Billing Details Endpoints
 
@@ -175,7 +188,7 @@ This section provides detailed documentation of all API endpoints associated wit
 - **POST** `/billingDetails/add`
 - **Description**: Adds new billing details.
 - **Request Body**: JSON object containing billing details.
-- **Response**: `201 Created` with created billing details in JSON.
+- **Response**: `200 OK` with created billing details in JSON.
 
 #### Update Billing Details
 - **PUT** `/billingDetails/update`
@@ -187,7 +200,7 @@ This section provides detailed documentation of all API endpoints associated wit
 - **DELETE** `/billingDetails/delete/{id}`
 - **Description**: Deletes billing details by ID.
 - **Path Variable**: `id` - The ID of the billing details to delete.
-- **Response**: `204 No Content`
+- **Response**: `200 OKt`
 
 ### User Endpoints
 #### Get All Users
@@ -201,11 +214,17 @@ This section provides detailed documentation of all API endpoints associated wit
   - **Path Variable**: `id` - The ID of the user to be found.
   - **Response**: `200 OK` with user details in JSON.
 
+#### Get User by Email
+  - **GET** `/user/email/{email}`
+  - **Description**: Retrieves a specific user by their email.
+  - **Path Variable**: `email` - The email of the user to be found.
+  - **Response**: `200 OK` with user details in JSON.
+
 #### Add user
   - **POST** `/user/add`
   - **Description**: Creates a new user.
   - **Request Body**: JSON object containing user details.
-  - **Response**: `201 Created` with created user details in JSON.
+  - **Response**: `200 OKd` with created user details in JSON.
 
 #### Update user
 - **PUT** `/user/update`
@@ -217,7 +236,7 @@ This section provides detailed documentation of all API endpoints associated wit
   - **DELETE** `/user/delete/{id}`
   - **Description**: Deletes a user by ID.
   - **Path Variable**: `id` - The ID of the user to be deleted.
-  - **Response**: `204 No Content`
+  - **Response**: `200 OK`
 
 #### Get LastPayment of User by ID
   - **GET** `/user/getLastPayment/{userId}`
@@ -247,13 +266,13 @@ This section provides detailed documentation of all API endpoints associated wit
   - **POST** `/likedContent/add`
   - **Description**: Creates a new liked content record.
   - **Request Body**: JSON object containing liked content details.
-  - **Response**: `201 Created` with created liked content details in JSON.
+  - **Response**: `200 OK` with created liked content details in JSON.
 
 #### Delete LikedContent
   - **DELETE** `/likedContent/delete/{id}`
   - **Description**: Deletes a liked content record by ID.
   - **Path Variable**: `id` - The ID of the user to be deleted.
-  - **Response**: `204 No Content`
+  - **Response**: `200 OK`
 
 #### Get LikedContent by User ID and Content ID
   - **GET** `likedContent/findUserContent/{userId}/{contentId}`
@@ -261,6 +280,20 @@ This section provides detailed documentation of all API endpoints associated wit
   - **Path Variable**: 
   - - `contentId` - The ID of the content to be found.
   - - `userId` - The ID of the user to be found.
+  - **Response**: `200 OK` with JSON array of liked content records.
+
+#### Get LikedContent by User ID
+  - **GET** `likedContent/findUserContent/{userId}`
+  - **Description**: Retrieves all liked content records.
+  - **Path Variable**: 
+  - - `userId` - The ID of the user to be found.
+  - **Response**: `200 OK` with JSON array of liked content records.
+
+#### Get LikedContent by Content ID
+  - **GET** `likedContent/findUserContent/{contentId}`
+  - **Description**: Retrieves all liked content records.
+  - **Path Variable**: 
+  - - `contentId` - The ID of the content to be found.
   - **Response**: `200 OK` with JSON array of liked content records.
 
 ## Architecture
@@ -326,6 +359,25 @@ This section provides detailed documentation of all API endpoints associated wit
  - username
 
   &nbsp; &nbsp;&nbsp; &nbsp;The password and the name are required for the admin to login. Again the username will only will be used to display his digital persona. In case any user has malicious intents he will be deleted. Any other problem such as the payment of the subscription to be reevaluated manually should be a task for the admin. Having such power an admin should be the only one that can add another admins and the only to remove or add content.
+## Front End
+  &nbsp; &nbsp;&nbsp; &nbsp; The front is divided in components, models and services. The default port for the front end is the 8081 port.
+  ### Models
+   &nbsp; &nbsp;&nbsp; &nbsp; Represent the logical structure of all entities containing all attributes and properties
+### Services
+   &nbsp; &nbsp;&nbsp; &nbsp; Services contains all the files dedicated for the http requests between the front end and the back end. All the http request used in this project to communicate with back end are found in the services class, each unique for the model it corresponds to.
+### Componets
+&nbsp; &nbsp;&nbsp; &nbsp; Components are the different steps represented in visual changes during the usage of the app.
+So we have the: 
+- signInSignUp component
+&nbsp; &nbsp;&nbsp; &nbsp; Meant for the first window when opening the app. It is meant for both users and admins to log in and use the app. If a new user does not have an account already he can create one by filling up a form requiring: email, username, and password. The email used as a primary key for users and the username is used as a primary key for admins, so if the username or email repeats, a red error message will be displayed under the button, letting the user know the authentication did not work.
+- account component
+&nbsp; &nbsp;&nbsp; &nbsp; Account component is the account display used by the user to utilize the application. Here he can find information such as account credentials, payment history and can pay the new subscription. Other than that the user can play videos, sort them by more criterias. Bonus the user can add a video to his favorite by pressing the like button, once the button was pressed it will turn into a dislike button and if pressed again it will remove the video from his favorites. Both account have the possibilities to delete their own accounts.
+- adminAccount component
+&nbsp; &nbsp;&nbsp; &nbsp; This component is similar to the account one but the admin has more functional possibilities such as removing users, adding admins, add new content, and remove content that he added. The admin instead of using his email in the email field in the sign in menu he must use his username. As mentioned before the admin usernames must be unique so if adding a new admin with the a username already in use, an error message will be displayed in the pop-up. Both account have the possibilities to delete their own accounts.
+
+![signin](https://github.com/vladvadean/Media-Platform/assets/126804850/9b5642bc-e11d-41e0-aa56-04f845d246a1)
+![admin account](https://github.com/vladvadean/Media-Platform/assets/126804850/7efde784-abc0-4438-bc2f-dee4ca3e6318)
+![account](https://github.com/vladvadean/Media-Platform/assets/126804850/dfe14dd5-c2e1-4e42-be66-38d2f369c14f)
 
 ## Testing
 
